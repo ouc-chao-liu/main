@@ -1,693 +1,672 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Description" content="Chao Liu, Ocean University of China">
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.2">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Times; color: #0000e3; -webkit-text-stroke: #0000e3}
-    p.p2 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px Times; color: #0000e3; -webkit-text-stroke: #0000e3; min-height: 14.0px}
-    p.p3 {margin: 0.0px 0.0px 0.0px 36.0px; text-indent: -36.0px; font: 12.0px 'Songti SC'; color: #0000e3; -webkit-text-stroke: #0000e3}
-    span.s1 {font-kerning: none}
-    span.s2 {font: 12.0px 'Songti SC'; font-kerning: none}
-    span.s3 {font: 12.0px Times; font-kerning: none}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chao Liu, Ocean University of China">
+    <title>Chao Liu (刘超) | OUC</title>
+    
+    <!-- 引入 Tailwind CSS (用于快速样式布局) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 引入 FontAwesome 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- 引入 Google Fonts (科技感字体) -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <!-- 自定义配置 Tailwind 主题颜色 -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        tech: {
+                            bg: '#0B1120',      /* 深蓝背景 */
+                            card: '#1E293B',    /* 卡片背景 */
+                            accent: '#38BDF8',  /* 亮青色强调 */
+                            purple: '#A855F7',  /* 紫色强调 */
+                            text: '#E2E8F0',    /* 主要文字 */
+                            muted: '#94A3B8'    /* 次要文字 */
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* 全局样式覆盖 */
+        body {
+            background-color: #0B1120;
+            color: #E2E8F0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* 滚动条美化 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B1120;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+
+        /* 科技感卡片边框效果 */
+        .tech-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(56, 189, 248, 0.1);
+            transition: all 0.3s ease;
+        }
+        .tech-card:hover {
+            border-color: rgba(56, 189, 248, 0.5);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* 导航栏磨砂效果 */
+        .glass-nav {
+            background: rgba(11, 17, 32, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* 粒子背景画布 */
+        #canvas-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.6;
+        }
+    </style>
 </head>
-<body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;html lang="zh-CN" class="scroll-smooth"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;head&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="description" content="Chao Liu, Ocean University of China"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;title&gt;Chao Liu (</span><span class="s2">刘超</span><span class="s1">) | OUC&lt;/title&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">    </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- </span><span class="s2">引入</span><span class="s1"> Tailwind CSS (</span><span class="s2">用于快速样式布局</span><span class="s1">) --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">    </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- </span><span class="s2">引入</span><span class="s1"> FontAwesome </span><span class="s2">图标库</span><span class="s1"> --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">    </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- </span><span class="s2">引入</span><span class="s1"> Google Fonts (</span><span class="s2">科技感字体</span><span class="s1">) --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- </span><span class="s2">自定义配置</span><span class="s1"> Tailwind </span><span class="s2">主题颜色</span><span class="s1"> --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>tailwind.config = {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>darkMode: 'class',</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>theme: {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>extend: {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>fontFamily: {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>sans: ['Inter', 'sans-serif'],</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>mono: ['JetBrains Mono', 'monospace'],</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>colors: {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>tech: {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>bg: '#0B1120',<span class="Apple-converted-space">      </span>/* </span><span class="s2">深蓝背景</span><span class="s1"> */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>card: '#1E293B',<span class="Apple-converted-space">    </span>/* </span><span class="s2">卡片背景</span><span class="s1"> */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>accent: '#38BDF8',<span class="Apple-converted-space">  </span>/* </span><span class="s2">亮青色强调</span><span class="s1"> */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>purple: '#A855F7',<span class="Apple-converted-space">  </span>/* </span><span class="s2">紫色强调</span><span class="s1"> */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>text: '#E2E8F0',<span class="Apple-converted-space">    </span>/* </span><span class="s2">主要文字</span><span class="s1"> */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>muted: '#94A3B8'<span class="Apple-converted-space">    </span>/* </span><span class="s2">次要文字</span><span class="s1"> */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>animation: {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;style&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* </span><span class="s2">全局样式覆盖</span><span class="s1"> */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>body {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: #0B1120;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: #E2E8F0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-family: 'Inter', sans-serif;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>overflow-x: hidden;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* </span><span class="s2">滚动条美化</span><span class="s1"> */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>::-webkit-scrollbar {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>width: 8px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>::-webkit-scrollbar-track {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: #0B1120;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>::-webkit-scrollbar-thumb {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: #334155;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 4px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>::-webkit-scrollbar-thumb:hover {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: #475569;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* </span><span class="s2">科技感卡片边框效果</span><span class="s1"> */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.tech-card {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: rgba(30, 41, 59, 0.7);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>backdrop-filter: blur(10px);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border: 1px solid rgba(56, 189, 248, 0.1);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transition: all 0.3s ease;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.tech-card:hover {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-color: rgba(56, 189, 248, 0.5);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 15px rgba(56, 189, 248, 0.1);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transform: translateY(-2px);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* </span><span class="s2">导航栏磨砂效果</span><span class="s1"> */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.glass-nav {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: rgba(11, 17, 32, 0.85);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>backdrop-filter: blur(12px);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-bottom: 1px solid rgba(255, 255, 255, 0.05);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* </span><span class="s2">粒子背景画布</span><span class="s1"> */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>#canvas-bg {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>position: fixed;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>top: 0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>left: 0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>width: 100%;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>height: 100%;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>z-index: -1;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>opacity: 0.6;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
-<p class="p1"><span class="s1">&lt;body class="antialiased selection:bg-tech-accent selection:text-white"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- </span><span class="s2">背景动画</span><span class="s1"> Canvas --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;canvas id="canvas-bg"&gt;&lt;/canvas&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- </span><span class="s2">顶部导航栏</span><span class="s1"> --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="flex items-center justify-between h-16"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="flex-shrink-0"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;a href="#" class="text-xl font-bold font-mono tracking-tighter text-white"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>CHAO&lt;span class="text-tech-accent"&gt;.LIU&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;!-- </span><span class="s2">桌面端菜单</span><span class="s1"> --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="hidden md:block"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="ml-10 flex items-baseline space-x-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;a href="#home" class="hover:text-tech-accent px-3 py-2 rounded-md text-sm font-medium transition-colors"&gt;</span><span class="s2">首页</span><span class="s1">&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;a href="#biography" class="hover:text-tech-accent px-3 py-2 rounded-md text-sm font-medium transition-colors"&gt;</span><span class="s2">简介</span><span class="s1">&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;a href="#research" class="hover:text-tech-accent px-3 py-2 rounded-md text-sm font-medium transition-colors"&gt;</span><span class="s2">研究</span><span class="s1">&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;a href="#publications" class="hover:text-tech-accent px-3 py-2 rounded-md text-sm font-medium transition-colors"&gt;</span><span class="s2">论文</span><span class="s1">&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;a href="#projects" class="hover:text-tech-accent px-3 py-2 rounded-md text-sm font-medium transition-colors"&gt;</span><span class="s2">项目</span><span class="s1">&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;a href="#experience" class="hover:text-tech-accent px-3 py-2 rounded-md text-sm font-medium transition-colors"&gt;</span><span class="s2">经历</span><span class="s1">&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;a href="#joinus" class="px-4 py-2 rounded bg-tech-accent text-slate-900 font-bold hover:bg-sky-300 transition-colors text-sm"&gt;</span><span class="s2">招生信息</span><span class="s1">&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;!-- </span><span class="s2">移动端菜单按钮</span><span class="s1"> --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="-mr-2 flex md:hidden"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;button type="button" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;i class="fas fa-bars"&gt;&lt;/i&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;!-- </span><span class="s2">移动端菜单面板</span><span class="s1"> --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="hidden md:hidden bg-slate-900 border-b border-gray-800" id="mobile-menu"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="px-2 pt-2 pb-3 space-y-1 sm:px-3"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;a href="#home" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"&gt;</span><span class="s2">首页</span><span class="s1">&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;a href="#biography" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"&gt;</span><span class="s2">简介</span><span class="s1">&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;a href="#research" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"&gt;</span><span class="s2">研究</span><span class="s1">&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;a href="#publications" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"&gt;</span><span class="s2">论文</span><span class="s1">&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;a href="#joinus" class="text-tech-accent block px-3 py-2 rounded-md text-base font-bold"&gt;</span><span class="s2">招生信息</span><span class="s1">&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/nav&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- ==========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">         </span>HOME / HERO SECTION</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">         </span>========================================== --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;section id="home" class="pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 max-w-7xl mx-auto"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;!-- </span><span class="s2">头像区域</span><span class="s1"> --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="lg:col-span-4 flex justify-center lg:justify-end order-1 lg:order-2"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="relative group"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;!-- </span><span class="s2">装饰光环</span><span class="s1"> --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="absolute -inset-1 bg-gradient-to-r from-tech-accent to-tech-purple rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;!-- </span><span class="s2">头像图片</span><span class="s1"> (</span><span class="s2">请确保</span><span class="s1"> data/lc.jpg </span><span class="s2">存在</span><span class="s1">) --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-lg overflow-hidden border-2 border-slate-700 bg-slate-800"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;!-- fallback logic included via onerror --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;img src="data/lc.jpg"<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                             </span>onerror="this.src='https://ui-avatars.com/api/?name=Chao+Liu&amp;background=0D8ABC&amp;color=fff&amp;size=256'"<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                             </span>alt="Chao Liu Profile"<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                             </span>class="w-full h-full object-cover transform transition duration-500 group-hover:scale-105"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;!-- </span><span class="s2">文字介绍区域</span><span class="s1"> --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="lg:col-span-8 order-2 lg:order-1 text-center lg:text-left"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="inline-block px-3 py-1 mb-4 text-xs font-mono text-tech-accent bg-tech-accent/10 rounded-full border border-tech-accent/20"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>PROFESSOR / RESEARCHER</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-4 text-white"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>Chao Liu &lt;span class="text-tech-muted text-3xl align-middle font-light"&gt;(</span><span class="s2">刘超</span><span class="s1">)&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/h1&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="space-y-2 text-lg text-tech-muted font-light mb-8"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;p class="flex items-center justify-center lg:justify-start gap-2"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;i class="fas fa-university text-tech-purple"&gt;&lt;/i&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;a href="http://www.ouc.edu.cn" target="_blank" class="hover:text-white transition"&gt;</span><span class="s2">中国海洋大学</span><span class="s1"> (Ocean University of China)&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;p class="flex items-center justify-center lg:justify-start gap-2"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;i class="fas fa-graduation-cap text-tech-accent"&gt;&lt;/i&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;a href="http://it.ouc.edu.cn/cs" target="_blank" class="hover:text-white transition"&gt;</span><span class="s2">计算机科学与技术学院</span><span class="s1"> - </span><span class="s2">副教授</span><span class="s1"> / </span><span class="s2">博士生导师</span><span class="s1">&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;p class="text-sm font-mono text-slate-400 mt-4 max-w-2xl mx-auto lg:mx-0 border-l-2 border-tech-accent pl-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span></span><span class="s2">山东省优秀青年基金获得者</span><span class="s1"> | </span><span class="s2">山东省青创团队带头人</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="flex flex-wrap gap-4 justify-center lg:justify-start"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;a href="mailto:liuchao@ouc.edu.cn" class="flex items-center gap-2 px-6 py-3 bg-white text-slate-900 rounded font-bold hover:bg-gray-200 transition"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;i class="fas fa-envelope"&gt;&lt;/i&gt; Email Me</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;a href="https://scholar.google.com.hk/citations?user=m5TcEMQAAAAJ&amp;hl=zh-CN" target="_blank" class="flex items-center gap-2 px-6 py-3 border border-slate-600 rounded text-slate-300 hover:border-white hover:text-white transition bg-slate-800/50"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;i class="fas fa-graduation-cap"&gt;&lt;/i&gt; Google Scholar</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;a href="https://www.researchgate.net/profile/Chao-Liu-80/publications" target="_blank" class="flex items-center gap-2 px-6 py-3 border border-slate-600 rounded text-slate-300 hover:border-white hover:text-white transition bg-slate-800/50"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;i class="fab fa-researchgate"&gt;&lt;/i&gt; ResearchGate</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="mt-6 text-sm text-slate-500 font-mono"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;i class="fas fa-map-marker-alt mr-2"&gt;&lt;/i&gt; </span><span class="s2">青岛市黄岛区三沙路</span><span class="s1">1299</span><span class="s2">号信息南楼</span><span class="s1">A413</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- ==========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">         </span>BIOGRAPHY</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">         </span>========================================== --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;section id="biography" class="py-16 bg-slate-900/50"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="max-w-7xl mx-auto px-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;h2 class="text-3xl font-bold mb-8 flex items-center"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span class="text-tech-accent mr-2"&gt;/&lt;/span&gt; </span><span class="s2">基本信息</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="tech-card p-8 rounded-xl relative overflow-hidden"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="absolute top-0 right-0 p-4 opacity-10"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;i class="fas fa-user-circle text-9xl"&gt;&lt;/i&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;p class="text-lg leading-relaxed text-slate-300 text-justify"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span></span><span class="s2">刘超，副教授，博士生导师，</span><span class="s1">&lt;b&gt;</span><span class="s2">山东省优秀青年基金获得者</span><span class="s1">&lt;/b&gt;</span><span class="s2">，山东省青创团队带头人，青岛市产业领军人才，</span><span class="s1">IEEE Senior Member</span><span class="s2">，</span><span class="s1">IEEE 1851</span><span class="s2">工作组主席，</span><span class="s1">ISO 21851</span><span class="s2">国际标准工作组副主席，</span><span class="s1">IEEE INFOCOM Advisory TPC Member</span><span class="s2">，</span><span class="s1">ACM SIGAPP China</span><span class="s2">执行委员，</span><span class="s1">ACM SIGBED China</span><span class="s2">青年委员，</span><span class="s1">CCF</span><span class="s2">物联网专委会执行委员，</span><span class="s1">CCF</span><span class="s2">普适计算专委会执行委员。</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;br&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;p class="text-lg leading-relaxed text-slate-300 text-justify"&gt;</span></p>
-<p class="p3"><span class="s3"><span class="Apple-converted-space">                    </span></span><span class="s1">长期从事</span><span class="s3">&lt;span class="text-tech-accent"&gt;</span><span class="s1">智能感知、智能人机交互、物联网和普适计算</span><span class="s3">&lt;/span&gt;</span><span class="s1">的研究工作。先后主持参与了国家自然科学基金重大仪器专项、国家重点研发计划、国家自然科学基金青年项目、国家自然科学基金面上项目和中国博士后科学基金等</span><span class="s3">10</span><span class="s1">余项国家级、省部级课题。</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;br&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;p class="text-lg leading-relaxed text-slate-300 text-justify"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span></span><span class="s2">在包括</span><span class="s1">CCS(Big 4)</span><span class="s2">、</span><span class="s1">JSAC</span><span class="s2">、</span><span class="s1">IMWUT/UbiComp</span><span class="s2">、</span><span class="s1">INFOCOM</span><span class="s2">、</span><span class="s1">ICDCS</span><span class="s2">、</span><span class="s1">TMC</span><span class="s2">、</span><span class="s1">TOSN</span><span class="s2">等知名国际期刊和国际会议发表学术论文</span><span class="s1">70</span><span class="s2">余篇。曾获</span><span class="s1">&lt;strong class="text-red-400"&gt;CCS 2024</span><span class="s2">（</span><span class="s1">CCF A</span><span class="s2">类会议）杰出论文奖</span><span class="s1">&lt;/strong&gt;</span><span class="s2">、</span><span class="s1">ACM China SIGAPP</span><span class="s2">新星奖、山东省教学成果奖（高等教育类）一等奖等奖励。</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- ==========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">         </span>RESEARCH DIRECTIONS (Image Cards)</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">         </span>========================================== --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;section id="research" class="py-16"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="max-w-7xl mx-auto px-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;h2 class="text-3xl font-bold mb-8 flex items-center"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span class="text-tech-accent mr-2"&gt;/&lt;/span&gt; </span><span class="s2">研究方向</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;p class="text-slate-400 mb-8"&gt;</span></p>
-<p class="p3"><span class="s3"><span class="Apple-converted-space">                </span></span><span class="s1">智能感知、无线感知、声波感知、人机交互和物联网。近期研究兴趣主要集中在智能无线感知、人机交互和移动计算。</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/p&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="grid grid-cols-1 md:grid-cols-3 gap-6"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;!-- Research Card 1 --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;a href="https://www.bilibili.com/video/BV1ty4y1a7YT/" target="_blank" class="group relative overflow-hidden rounded-xl border border-slate-700 aspect-video block"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;img src="./data/1.png" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Acoustic+Sensing'" alt="</span><span class="s2">声波感知</span><span class="s1">" class="w-full h-full object-cover transition duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="absolute bottom-0 left-0 p-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-lg font-bold text-white group-hover:text-tech-accent transition"&gt;</span><span class="s2">非接触式声波感知技术</span><span class="s1">&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;p class="text-xs text-slate-400 mt-1"&gt;&lt;i class="fas fa-play-circle"&gt;&lt;/i&gt; Watch Demo&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/a&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;!-- Research Card 2 --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;a href="https://www.bilibili.com/video/BV16c411r7w3/" target="_blank" class="group relative overflow-hidden rounded-xl border border-slate-700 aspect-video block"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;img src="./data/3.png" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Face+ID'" alt="</span><span class="s2">人脸识别</span><span class="s1">" class="w-full h-full object-cover transition duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="absolute bottom-0 left-0 p-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-lg font-bold text-white group-hover:text-tech-accent transition"&gt;</span><span class="s2">基于音频感知的人脸识别</span><span class="s1">&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;p class="text-xs text-slate-400 mt-1"&gt;&lt;i class="fas fa-play-circle"&gt;&lt;/i&gt; Watch Demo&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/a&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;!-- Research Card 3 --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;a href="https://www.bilibili.com/video/BV15p4y1S7As" target="_blank" class="group relative overflow-hidden rounded-xl border border-slate-700 aspect-video block"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;img src="./data/2.png" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=WiFi+Sensing'" alt="WIFI</span><span class="s2">感知</span><span class="s1">" class="w-full h-full object-cover transition duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="absolute bottom-0 left-0 p-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-lg font-bold text-white group-hover:text-tech-accent transition"&gt;</span><span class="s2">非接触式无线信号动作识别</span><span class="s1">&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;p class="text-xs text-slate-400 mt-1"&gt;&lt;i class="fas fa-play-circle"&gt;&lt;/i&gt; Watch Demo&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- ==========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">         </span>PUBLICATIONS (Timeline Style)</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">         </span>========================================== --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;section id="publications" class="py-16 bg-slate-900/50"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="max-w-7xl mx-auto px-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="flex justify-between items-center mb-8"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;h2 class="text-3xl font-bold flex items-center"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;span class="text-tech-accent mr-2"&gt;/&lt;/span&gt; </span><span class="s2">近期论文</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="space-x-2 text-sm"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;a href="https://www.researchgate.net/profile/Chao-Liu-80/publications" class="text-tech-accent hover:underline"&gt;ResearchGate&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;span class="text-slate-600"&gt;|&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;a href="https://scholar.google.com.hk/citations?user=m5TcEMQAAAAJ&amp;hl=zh-CN" class="text-tech-accent hover:underline"&gt;Google Scholar&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="space-y-8 border-l border-slate-700 ml-3 pl-8 relative"&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;!-- Year 2025 --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="relative"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;span class="absolute -left-11 top-0 bg-tech-bg border border-tech-accent text-tech-accent px-2 py-1 rounded text-xs font-mono font-bold"&gt;2025&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="space-y-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;!-- Paper 1 --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-300"&gt;Xue Gong, Kaiwen Guo, Hao Chen, Feng Li, &lt;b&gt;Chao Liu*&lt;/b&gt;. Stick, Swipe, Secure: Acoustic Cross-Device User Authentication via a Low-Cost Passive Fingerprint Sticker. &lt;span class="text-tech-accent font-bold"&gt;IMWUT/UbiComp 2025&lt;/span&gt;. (CCF A)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-300"&gt;Hao Chen, Penghao Wang, Jingyang Hu, Feng Li, Hongbo Jiang, Minglu Li, &lt;b&gt;Chao Liu*&lt;/b&gt;. Wi-GR: Wi-Fi-based Gait Recognition Using Multi-part Velocity Profile. &lt;span class="text-tech-accent font-bold"&gt;IEEE Transactions on Mobile Computing 2025&lt;/span&gt;. (CCF A)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-300"&gt;Penghao Wang, Shuo Huai, Yetong Cao, &lt;b&gt;Chao Liu*&lt;/b&gt;, Jun Luo. Threat from Windshield: Vehicle Windows as Involuntary Attack Sources on Automotive Voice Assistants. &lt;span class="text-tech-accent font-bold"&gt;CCS 2025&lt;/span&gt;. (CCF A, Big 4)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-300"&gt;Chongxuan Ma, Zheng Xie, Kaiwen Guo, &lt;b&gt;Chao Liu*&lt;/b&gt;. NFINGER: Personalized Backside Gesture Recognition on Smartphones Using Back-mounted NFC Tag Array. &lt;span class="text-tech-accent font-bold"&gt;IMWUT/UbiComp 2025&lt;/span&gt;. (CCF A)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-300"&gt;Penghao Wang, Shujie Zhang, Chao Cai, &lt;b&gt;Chao Liu*&lt;/b&gt;, Jun Luo. Sonic-Fi: Practical Vital Signs Distillation Leveraging Fine-grained Physical Resolution. &lt;span class="text-tech-accent font-bold"&gt;IMWUT/UbiComp 2025&lt;/span&gt;. (CCF A)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-300"&gt;&lt;b&gt;Chao Liu&lt;/b&gt;, Hao Chen, Jingyang Hu, Qibo Zhang, Siyu Chen, Hongbo Jiang, Penghao Wang. EchoHealth: Non-contact Rehabilitation Exercises via Active Acoustic Sensing. &lt;span class="text-tech-accent font-bold"&gt;INFOCOM 2025&lt;/span&gt;. (CCF A)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                         </span>&lt;div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-300"&gt;Hao Chen, Penghao Wang, Feng Hong, Zhongwen Guo, &lt;b&gt;Chao Liu*&lt;/b&gt;. BEyes: Unseen Eyes Snooping Pattern Lock via BFI. &lt;span class="text-tech-accent font-bold"&gt;ICDCS 2025&lt;/span&gt;. (CCF B)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                         </span>&lt;div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-300"&gt;&lt;b&gt;Chao Liu&lt;/b&gt;, Yipeng Liu, Feng Hong, Zhongwen Guo, Jiguo Yu, Feng Li*. Mring: Contactless MR/AR Extended Input Method based on Magnetic Signal. &lt;span class="text-tech-accent font-bold"&gt;ACM Transactions on Sensor Networks 2025&lt;/span&gt;. (SCI, CCF B)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-300"&gt;Hui Liu, Penghao Wang, Pengyu Wang, Jingyang Hu, Hongbo Jiang, &lt;b&gt;Chao Liu*&lt;/b&gt;. From Fragmentation to Correlation: Reliable LoRa Reception over Weak Marine Links. &lt;span class="text-tech-accent font-bold"&gt;ACM Transactions on Sensor Networks 2025&lt;/span&gt;. (SCI, CCF B)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-300"&gt;Shuai Guo, Menglei Xia, Huanqun Xue, Yutong Song, Zhitian Zhang, &lt;b&gt;Chao Liu*&lt;/b&gt;. MATM-SN: A Deep Reinforcement Learning Model for Ocean Sensing Task Allocation based on Generative Social Network. &lt;span class="text-tech-accent font-bold"&gt;IEEE Internet of Things Journal 2025&lt;/span&gt;. (SCI)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;!-- Year 2024 --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="relative pt-8"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;span class="absolute -left-11 top-8 bg-tech-bg border border-slate-700 text-slate-400 px-2 py-1 rounded text-xs font-mono font-bold"&gt;2024&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="space-y-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-300"&gt;Penghao Wang, Ruobing Jiang, Jingyang Hu, Yanmin Zhu, Hongbo Jiang, Minglu Li, &lt;b&gt;Chao Liu*&lt;/b&gt;. AMT&lt;sup&gt;+&lt;/sup&gt;: Acoustic Multi-target Tracking with Smartphone MIMO System. &lt;span class="text-tech-accent font-bold"&gt;IEEE Transactions on Mobile Computing 2024&lt;/span&gt;. (SCI, CCF A)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-red-500"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                             </span>&lt;div class="flex items-start"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;i class="fas fa-trophy text-red-500 mt-1 mr-3"&gt;&lt;/i&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;p class="text-slate-300"&gt;Penghao Wang, Jingzhi Hu, &lt;b&gt;Chao Liu*&lt;/b&gt;, Jun Luo. RefleXnoop: Passwords Snooping on NLoS Laptops Leveraging Screen-Induced Sound Reflection. &lt;span class="text-tech-accent font-bold"&gt;CCS 2024&lt;/span&gt;. (CCF A, Big 4, &lt;strong class="text-red-400"&gt;Distinguished Paper Award&lt;/strong&gt;)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                         </span>&lt;div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-300"&gt;Zhaopeng Xu, Tong Liu, Ruobing Jiang, Pengfei Hu, Zhongwen Guo, &lt;b&gt;Chao Liu*&lt;/b&gt;. AFace: Range-flexible Anti-spoofing Face Authentication via Smartphone Acoustic Sensing. &lt;span class="text-tech-accent font-bold"&gt;IMWUT/UbiComp 2024&lt;/span&gt;. (CCF A)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                         </span>&lt;div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-300"&gt;Penghao Wang, Ruobing Jiang, &lt;b&gt;Chao Liu*&lt;/b&gt;, Jun Luo. AGR: Acoustic Gait Recognition Using Interpretable Micro-Range Profile. &lt;span class="text-tech-accent font-bold"&gt;INFOCOM 2024&lt;/span&gt;. (CCF A)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-300"&gt;Shuai Guo, Meilei Xia, Huanqun Xue, Shuang Wang, &lt;b&gt;Chao Liu*&lt;/b&gt;. OceanCrowd: Vessel Trajectory Data-based Participant Selection for Mobile Crowd Sensing in Ocean Observation. &lt;span class="text-tech-accent font-bold"&gt;IEEE Transactions on Sustainable Computing 2024&lt;/span&gt;. (SCI)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-300"&gt;Haotian Zhang, Lukun Wang, Jiaming Pei, Feng Lyu, Minglu Li, &lt;b&gt;Chao Liu*&lt;/b&gt;. RF-Sign: Position-Independent Sign Language Recognition Using Passive RFID Tags. &lt;span class="text-tech-accent font-bold"&gt;IEEE Internet of Things Journal 2024&lt;/span&gt;. (SCI)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-300"&gt;Yang Wang, Feng Hong, Yufei Jiang, Chenyu Bao, &lt;b&gt;Chao Liu&lt;/b&gt;, Zhongwen Guo. ToothFairy: Real-time Tooth-by-tooth Brushing Monitor using Earphone Reversed Signals. &lt;span class="text-tech-accent font-bold"&gt;IMWUT/UbiComp 2024&lt;/span&gt;. (CCF A)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                         </span>&lt;div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-300"&gt;Lina Wang, Huan Yang, Yiran Shen, &lt;b&gt;Chao Liu&lt;/b&gt;, Lianyong Qi, Xiuzhen Cheng, Feng Li. PDSR: A Privacy-Preserving Diversified ServiceRecommendation Method on Distributed Data. &lt;span class="text-tech-accent font-bold"&gt;IEEE Transactions on Services Computing 2024&lt;/span&gt;. (SCI, CCF A)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-300"&gt;Chengwu Liao, Chao Chen, Wanyi Zhang, Suiming Guo, &lt;b&gt;Chao Liu&lt;/b&gt;. AGENDA: Predicting Trip Purposes with A New Graph Embedding Network and Active Domain Adaptation. &lt;span class="text-tech-accent font-bold"&gt;ACM Transactions on Knowledge Discovery from Data 2024&lt;/span&gt;. (SCI, CCF B)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-300"&gt;Siyu Chen, Hongbo Jiang, Jie Xiong, Jingyang Hu, Penghao Wang, &lt;b&gt;Chao Liu&lt;/b&gt;, Zhu Xiao, Bo Li. BeamCount: Indoor Crowd Counting Using Wi-Fi Beamforming Feedback Information. &lt;span class="text-tech-accent font-bold"&gt;MobiHoc 2024&lt;/span&gt;. (CCF B)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                 </span>&lt;!-- Year 2023 --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="relative pt-8"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                     </span>&lt;span class="absolute -left-11 top-8 bg-tech-bg border border-slate-700 text-slate-400 px-2 py-1 rounded text-xs font-mono font-bold"&gt;2023&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="space-y-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                             </span>&lt;p class="text-slate-300"&gt;Hui Xia, Shuo Xu, Jiaming Pei, Rui Zhang, Zhi Yu, Weitao Zou, Lukun Wang, &lt;b&gt;Chao Liu*&lt;/b&gt;. FedME&lt;sup&gt;2&lt;/sup&gt;: Memory Evaluation &amp; Erase Promoting Federated Unlearning in DTMN. &lt;span class="text-tech-accent font-bold"&gt;IEEE Journal on Selected Areas in Communications(JSAC) 2023&lt;/span&gt;. (SCI, CCF A)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                         </span>&lt;div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                             </span>&lt;p class="text-slate-300"&gt;Penghao Wang, Ruobing Jiang, Zhongwen Guo, &lt;b&gt;Chao Liu*&lt;/b&gt;. Afitness: Fitness Monitoring on Smart Devices via Acoustic Motion Images. &lt;span class="text-tech-accent font-bold"&gt;ACM Transactions on Sensor Networks 2023&lt;/span&gt;. (SCI, CCF B)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;!-- ... </span><span class="s2">更多</span><span class="s1"> 2023 </span><span class="s2">论文请按照此格式复制</span><span class="s1"> ... --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="text-center py-2"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                             </span>&lt;a href="https://www.researchgate.net/profile/Chao-Liu-80/publications" class="text-sm text-slate-500 hover:text-white border-b border-dashed border-slate-500"&gt;View More in 2023 &amp; Before...&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- ==========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">         </span>PROJECTS / FUNDING</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">         </span>========================================== --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;section id="projects" class="py-16"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="max-w-7xl mx-auto px-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;h2 class="text-3xl font-bold mb-8 flex items-center"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span class="text-tech-accent mr-2"&gt;/&lt;/span&gt; </span><span class="s2">研究项目</span><span class="s1"> &amp; </span><span class="s2">经费</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/h2&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="grid grid-cols-1 md:grid-cols-2 gap-6"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;!-- Funding Item --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="tech-card p-6 rounded-lg"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="flex justify-between items-start mb-2"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;span class="text-xs font-mono text-tech-purple bg-tech-purple/10 px-2 py-1 rounded"&gt;2023/01-2026/12&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;span class="text-xs font-bold text-slate-400"&gt;¥700,000&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h3 class="font-bold text-white mb-2"&gt;</span><span class="s2">国家自然科学基金面上项目</span><span class="s1">&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;p class="text-sm text-slate-400"&gt;</span><span class="s2">面向泛在场景的非接触式声波感知关键技术研究</span><span class="s1"> (#62272427) (</span><span class="s2">位次</span><span class="s1">1)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                 </span>&lt;div class="tech-card p-6 rounded-lg"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="flex justify-between items-start mb-2"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;span class="text-xs font-mono text-tech-purple bg-tech-purple/10 px-2 py-1 rounded"&gt;2025/10-2028/09&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;span class="text-xs font-bold text-slate-400"&gt;¥500,000&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h3 class="font-bold text-white mb-2"&gt;</span><span class="s2">山东省优秀青年基金</span><span class="s1">&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;p class="text-sm text-slate-400"&gt;</span><span class="s2">泛在无线智能感知</span><span class="s1"> (#ZR2025QB43) (</span><span class="s2">位次</span><span class="s1">1)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                 </span>&lt;div class="tech-card p-6 rounded-lg"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="flex justify-between items-start mb-2"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;span class="text-xs font-mono text-tech-purple bg-tech-purple/10 px-2 py-1 rounded"&gt;2025/08-2025/10&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;span class="text-xs font-bold text-slate-400"&gt;¥473,300&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h3 class="font-bold text-white mb-2"&gt;</span><span class="s2">高校外协横向课题</span><span class="s1">&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;p class="text-sm text-slate-400"&gt;(</span><span class="s2">位次</span><span class="s1">1)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                 </span>&lt;div class="tech-card p-6 rounded-lg"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="flex justify-between items-start mb-2"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;span class="text-xs font-mono text-tech-purple bg-tech-purple/10 px-2 py-1 rounded"&gt;2025/07-2026/07&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;span class="text-xs font-bold text-slate-400"&gt;¥300,000&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h3 class="font-bold text-white mb-2"&gt;</span><span class="s2">应急管理部重点实验室开放课题</span><span class="s1">&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;p class="text-sm text-slate-400"&gt;</span><span class="s2">基于深度学习的电芯故障识别和热失控预测技术</span><span class="s1"> (#EES2025KF22) (</span><span class="s2">位次</span><span class="s1">1)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                 </span>&lt;div class="tech-card p-6 rounded-lg"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="flex justify-between items-start mb-2"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;span class="text-xs font-mono text-tech-purple bg-tech-purple/10 px-2 py-1 rounded"&gt;2025/01-2027/12&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;span class="text-xs font-bold text-slate-400"&gt;¥100,000&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h3 class="font-bold text-white mb-2"&gt;</span><span class="s2">算力互联网与信息安全教育部重点实验室重点课题</span><span class="s1">&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;p class="text-sm text-slate-400"&gt;</span><span class="s2">基于边缘算力网的大规模视频分析系统资源调度机制研究</span><span class="s1"> (#2024ZD003) (</span><span class="s2">位次</span><span class="s1">1)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                 </span>&lt;!-- </span><span class="s2">更多项目可以按照此格式添加</span><span class="s1"> --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- ==========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">         </span>STANDARDS &amp; AWARDS (Compact List)</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">         </span>========================================== --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;section class="py-16 bg-slate-900/50"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;!-- Standards --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                 </span>&lt;h2 class="text-2xl font-bold mb-6 flex items-center"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;i class="fas fa-book mr-3 text-tech-accent"&gt;&lt;/i&gt; </span><span class="s2">标准与著作</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;ul class="space-y-3 text-sm text-slate-300"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;li class="flex items-start"&gt;&lt;i class="fas fa-check text-tech-accent mt-1 mr-2"&gt;&lt;/i&gt; IEEE 1851-2023: IEEE Standard for Design Criteria of Integrated Sensor-Based Test Applications for Household Appliances. (Chair)&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;li class="flex items-start"&gt;&lt;i class="fas fa-check text-tech-accent mt-1 mr-2"&gt;&lt;/i&gt; ISO 21851-2020: Marine technology — Ocean observation systems... (Vice Chair)&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;li class="flex items-start"&gt;&lt;i class="fas fa-check text-tech-accent mt-1 mr-2"&gt;&lt;/i&gt; IEEE 2735-2022: Standard for Interoperability of Complex Virtual Instruments for IoT&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;li class="flex items-start"&gt;&lt;i class="fas fa-check text-tech-accent mt-1 mr-2"&gt;&lt;/i&gt; </span><span class="s2">郭忠文，刘超，王玺</span><span class="s1"> </span><span class="s2">著，《物联网工程设计与开发》，科学出版社</span><span class="s1">“</span><span class="s2">十四五</span><span class="s1">”</span><span class="s2">普通高等教育本科规划教材</span><span class="s1">.&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/ul&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;!-- Awards --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                 </span>&lt;h2 class="text-2xl font-bold mb-6 flex items-center"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;i class="fas fa-medal mr-3 text-yellow-500"&gt;&lt;/i&gt; </span><span class="s2">荣誉与奖励</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                 </span>&lt;ul class="space-y-3 text-sm text-slate-300 max-h-80 overflow-y-auto pr-2 custom-scrollbar"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;li class="flex items-start"&gt;&lt;i class="fas fa-star text-yellow-500 mt-1 mr-2"&gt;&lt;/i&gt; 2025 </span><span class="s2">山东省优秀青年基金获得者</span><span class="s1">&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;li class="flex items-start"&gt;&lt;i class="fas fa-star text-yellow-500 mt-1 mr-2"&gt;&lt;/i&gt; &lt;span class="font-bold text-white"&gt;2024 ACM CCS Distinguished Paper Award&lt;/span&gt; (with Penghao Wang, Jingzhi Hu, Jun Luo)&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;li class="flex items-start"&gt;&lt;i class="fas fa-star text-yellow-500 mt-1 mr-2"&gt;&lt;/i&gt; 2025 </span><span class="s2">青岛市产业领军人才</span><span class="s1">&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;li class="flex items-start"&gt;&lt;i class="fas fa-star text-yellow-500 mt-1 mr-2"&gt;&lt;/i&gt; 2025 </span><span class="s2">中国海洋大学研究生优秀成果一等奖</span><span class="s1">&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;li class="flex items-start"&gt;&lt;i class="fas fa-star text-yellow-500 mt-1 mr-2"&gt;&lt;/i&gt; 2020 ACM China SIGAPP </span><span class="s2">新星奖</span><span class="s1">&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;li class="flex items-start"&gt;&lt;i class="fas fa-star text-yellow-500 mt-1 mr-2"&gt;&lt;/i&gt; IEEE 1851 </span><span class="s2">杰出贡献奖励</span><span class="s1">&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;!-- More awards --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/ul&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- ==========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">         </span>EXPERIENCE</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">         </span>========================================== --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;section id="experience" class="py-16"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="max-w-7xl mx-auto px-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">             </span>&lt;h2 class="text-3xl font-bold mb-8 flex items-center"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span class="text-tech-accent mr-2"&gt;/&lt;/span&gt; </span><span class="s2">教育及工作经历</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="grid grid-cols-1 md:grid-cols-2 gap-8"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;!-- Education --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="tech-card p-6 rounded-lg"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h3 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2"&gt;&lt;i class="fas fa-graduation-cap mr-2"&gt;&lt;/i&gt; </span><span class="s2">教育经历</span><span class="s1">&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;ul class="space-y-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;li class="relative pl-6 border-l border-slate-600"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div class="absolute -left-1.5 top-1.5 w-3 h-3 bg-tech-accent rounded-full"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;span class="text-xs text-tech-accent font-mono"&gt;2014/10</span><span class="s2">－</span><span class="s1">2015/10&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="font-bold text-white"&gt;</span><span class="s2">伊利诺伊理工大学</span><span class="s1"> (IIT)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-sm text-slate-400"&gt;</span><span class="s2">联合培养博士</span><span class="s1">&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;li class="relative pl-6 border-l border-slate-600"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div class="absolute -left-1.5 top-1.5 w-3 h-3 bg-tech-accent rounded-full"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;span class="text-xs text-tech-accent font-mono"&gt;2011/09</span><span class="s2">－</span><span class="s1">2016/07&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="font-bold text-white"&gt;</span><span class="s2">中国海洋大学</span><span class="s1">&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-sm text-slate-400"&gt;</span><span class="s2">计算机系统结构，博士</span><span class="s1">&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                         </span>&lt;li class="relative pl-6 border-l border-slate-600"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div class="absolute -left-1.5 top-1.5 w-3 h-3 bg-tech-accent rounded-full"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;span class="text-xs text-tech-accent font-mono"&gt;2007/09</span><span class="s2">－</span><span class="s1">2011/07&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="font-bold text-white"&gt;</span><span class="s2">中国海洋大学</span><span class="s1">&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-sm text-slate-400"&gt;</span><span class="s2">计算机科学与技术，学士</span><span class="s1">&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/ul&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                 </span>&lt;!-- Work &amp; Service --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="tech-card p-6 rounded-lg"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h3 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2"&gt;&lt;i class="fas fa-briefcase mr-2"&gt;&lt;/i&gt; </span><span class="s2">工作与兼职</span><span class="s1">&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                     </span>&lt;ul class="space-y-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;li class="relative pl-6 border-l border-slate-600"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div class="absolute -left-1.5 top-1.5 w-3 h-3 bg-tech-purple rounded-full"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;span class="text-xs text-tech-purple font-mono"&gt;2016/7</span><span class="s2">－今</span><span class="s1">&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="font-bold text-white"&gt;</span><span class="s2">中国海洋大学</span><span class="s1">&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-sm text-slate-400"&gt;</span><span class="s2">讲师，副教授</span><span class="s1">&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;li class="mt-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="font-bold text-white mb-1"&gt;</span><span class="s2">学术兼职：</span><span class="s1">&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-xs text-slate-400 leading-relaxed"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>IEEE 1851</span><span class="s2">国际标准工作组主席、</span><span class="s1">ISO 21851</span><span class="s2">国际标准工作组副主席、</span><span class="s1">IEEE INFOCOM Advisory TPC Member</span><span class="s2">、</span><span class="s1">CCF</span><span class="s2">物联网专委会执行委员、</span><span class="s1">CCF</span><span class="s2">普适计算专委会执行委员、</span><span class="s1"> ACM SIGAPP China </span><span class="s2">执行委员会委员</span><span class="s1">...</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/ul&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- ==========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">         </span>JOIN US / FOOTER</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">         </span>========================================== --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;section id="joinus" class="py-20 relative overflow-hidden"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;!-- </span><span class="s2">背景装饰</span><span class="s1"> --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="absolute inset-0 bg-gradient-to-br from-tech-bg via-tech-card to-slate-900 z-[-1]"&gt;&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="max-w-4xl mx-auto px-4 text-center"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;h2 class="text-4xl font-bold mb-6 text-white"&gt;</span><span class="s2">加入我们</span><span class="s1">&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="tech-card p-8 rounded-2xl text-left border-t-4 border-t-tech-accent"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;p class="text-slate-300 mb-6"&gt;</span></p>
-<p class="p3"><span class="s3"><span class="Apple-converted-space">                    </span></span><span class="s1">我们的团队主要面向前沿移动计算、智能感知相关问题展开研究。主要成果目标为</span><span class="s3">CCF A</span><span class="s1">、</span><span class="s3">B</span><span class="s1">类顶尖会议、期刊。</span><span class="s3">&lt;br&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span></span><span class="s2">可提前阅读论文：</span><span class="s1">&lt;a href="https://arxiv.org/pdf/1901.03450.pdf" class="text-tech-accent underline"&gt;Intro Paper PDF&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="space-y-2 mb-8"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h4 class="font-bold text-white"&gt;</span><span class="s2">招生要求：</span><span class="s1">&lt;/h4&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;ol class="list-decimal list-inside text-slate-400 space-y-1"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;li&gt;</span><span class="s2">有良好的数学基础（高等数学、线性代数）和动手能力；</span><span class="s1">&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;li&gt;</span><span class="s2">具备复变函数、信号分析相关的基本知识优先；</span><span class="s1">&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;li&gt;</span><span class="s2">有</span><span class="s1">ACM</span><span class="s2">竞赛相关获奖经历优先；</span><span class="s1">&lt;/li&gt;</span></p>
-<p class="p3"><span class="s3"><span class="Apple-converted-space">                        </span>&lt;li&gt;</span><span class="s1">如果你以上</span><span class="s3">3</span><span class="s1">条都不具备，但非常勤奋，做好了刻苦奋斗</span><span class="s3">3</span><span class="s1">年的准备，也可以联系我。</span><span class="s3">&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/ol&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="text-center"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;a href="mailto:liuchao@ouc.edu.cn" class="inline-block px-8 py-4 bg-tech-accent text-slate-900 font-bold rounded-full hover:bg-white hover:scale-105 transition shadow-lg shadow-tech-accent/25"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;i class="fas fa-paper-plane mr-2"&gt;&lt;/i&gt; </span><span class="s2">联系我</span><span class="s1">: liuchao@ouc.edu.cn</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;footer class="mt-16 text-slate-600 text-sm"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;p&gt;&amp;copy; 2025 Chao Liu. Ocean University of China.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;p&gt;Designed with &lt;i class="fas fa-heart text-red-500"&gt;&lt;/i&gt; &amp; Code.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/footer&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- Canvas Animation Script --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const canvas = document.getElementById('canvas-bg');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const ctx = canvas.getContext('2d');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let width, height;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let particles = [];</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// </span><span class="s2">初始化</span><span class="s1"> Canvas </span><span class="s2">尺寸</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function resize() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>width = canvas.width = window.innerWidth;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>height = canvas.height = window.innerHeight;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// </span><span class="s2">粒子类</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>class Particle {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>constructor() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>this.x = Math.random() * width;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>this.y = Math.random() * height;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>this.vx = (Math.random() - 0.5) * 0.5;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>this.vy = (Math.random() - 0.5) * 0.5;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>this.size = Math.random() * 2 + 1;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>update() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>this.x += this.vx;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>this.y += this.vy;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (this.x &lt; 0 || this.x &gt; width) this.vx *= -1;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (this.y &lt; 0 || this.y &gt; height) this.vy *= -1;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>draw() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>ctx.fillStyle = 'rgba(56, 189, 248, 0.5)'; // Cyan color</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>ctx.beginPath();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>ctx.fill();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// </span><span class="s2">初始化粒子</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function init() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>particles = [];</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>for (let i = 0; i &lt; 50; i++) { // </span><span class="s2">粒子数量</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>particles.push(new Particle());</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// </span><span class="s2">动画循环</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function animate() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>ctx.clearRect(0, 0, width, height);</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// </span><span class="s2">绘制连线</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>for (let i = 0; i &lt; particles.length; i++) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>particles[i].update();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>particles[i].draw();</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>for (let j = i; j &lt; particles.length; j++) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const dx = particles[i].x - particles[j].x;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const dy = particles[i].y - particles[j].y;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const distance = Math.sqrt(dx * dx + dy * dy);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>if (distance &lt; 150) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>ctx.strokeStyle = `rgba(56, 189, 248, ${0.1 - distance/1500})`;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>ctx.lineWidth = 1;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>ctx.beginPath();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>ctx.moveTo(particles[i].x, particles[i].y);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>ctx.lineTo(particles[j].x, particles[j].y);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>ctx.stroke();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>requestAnimationFrame(animate);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>window.addEventListener('resize', resize);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>resize();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>init();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>animate();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+<body class="antialiased selection:bg-tech-accent selection:text-white">
+
+    <!-- 背景动画 Canvas -->
+    <canvas id="canvas-bg"></canvas>
+
+    <!-- 顶部导航栏 -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-xl font-bold font-mono tracking-tighter text-white">
+                        CHAO<span class="text-tech-accent">.LIU</span>
+                    </a>
+                </div>
+                <!-- 桌面端菜单 -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#home" class="hover:text-tech-accent px-3 py-2 rounded-md text-sm font-medium transition-colors">首页</a>
+                        <a href="#biography" class="hover:text-tech-accent px-3 py-2 rounded-md text-sm font-medium transition-colors">简介</a>
+                        <a href="#research" class="hover:text-tech-accent px-3 py-2 rounded-md text-sm font-medium transition-colors">研究</a>
+                        <a href="#publications" class="hover:text-tech-accent px-3 py-2 rounded-md text-sm font-medium transition-colors">论文</a>
+                        <a href="#projects" class="hover:text-tech-accent px-3 py-2 rounded-md text-sm font-medium transition-colors">项目</a>
+                        <a href="#experience" class="hover:text-tech-accent px-3 py-2 rounded-md text-sm font-medium transition-colors">经历</a>
+                        <a href="#joinus" class="px-4 py-2 rounded bg-tech-accent text-slate-900 font-bold hover:bg-sky-300 transition-colors text-sm">招生信息</a>
+                    </div>
+                </div>
+                <!-- 移动端菜单按钮 -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 移动端菜单面板 -->
+        <div class="hidden md:hidden bg-slate-900 border-b border-gray-800" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">首页</a>
+                <a href="#biography" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">简介</a>
+                <a href="#research" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">研究</a>
+                <a href="#publications" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">论文</a>
+                <a href="#joinus" class="text-tech-accent block px-3 py-2 rounded-md text-base font-bold">招生信息</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==========================================
+         HOME / HERO SECTION
+         ========================================== -->
+    <section id="home" class="pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- 头像区域 -->
+            <div class="lg:col-span-4 flex justify-center lg:justify-end order-1 lg:order-2">
+                <div class="relative group">
+                    <!-- 装饰光环 -->
+                    <div class="absolute -inset-1 bg-gradient-to-r from-tech-accent to-tech-purple rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+                    <!-- 头像图片 (请确保 data/lc.jpg 存在) -->
+                    <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-lg overflow-hidden border-2 border-slate-700 bg-slate-800">
+                        <!-- fallback logic included via onerror -->
+                        <img src="data/lc.jpg" 
+                             onerror="this.src='https://ui-avatars.com/api/?name=Chao+Liu&background=0D8ABC&color=fff&size=256'" 
+                             alt="Chao Liu Profile" 
+                             class="w-full h-full object-cover transform transition duration-500 group-hover:scale-105">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 文字介绍区域 -->
+            <div class="lg:col-span-8 order-2 lg:order-1 text-center lg:text-left">
+                <div class="inline-block px-3 py-1 mb-4 text-xs font-mono text-tech-accent bg-tech-accent/10 rounded-full border border-tech-accent/20">
+                    PROFESSOR / RESEARCHER
+                </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-4 text-white">
+                    Chao Liu <span class="text-tech-muted text-3xl align-middle font-light">(刘超)</span>
+                </h1>
+                
+                <div class="space-y-2 text-lg text-tech-muted font-light mb-8">
+                    <p class="flex items-center justify-center lg:justify-start gap-2">
+                        <i class="fas fa-university text-tech-purple"></i>
+                        <a href="http://www.ouc.edu.cn" target="_blank" class="hover:text-white transition">中国海洋大学 (Ocean University of China)</a>
+                    </p>
+                    <p class="flex items-center justify-center lg:justify-start gap-2">
+                        <i class="fas fa-graduation-cap text-tech-accent"></i>
+                        <a href="http://it.ouc.edu.cn/cs" target="_blank" class="hover:text-white transition">计算机科学与技术学院 - 副教授 / 博士生导师</a>
+                    </p>
+                    <p class="text-sm font-mono text-slate-400 mt-4 max-w-2xl mx-auto lg:mx-0 border-l-2 border-tech-accent pl-4">
+                        山东省优秀青年基金获得者 | 山东省青创团队带头人
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
+                    <a href="mailto:liuchao@ouc.edu.cn" class="flex items-center gap-2 px-6 py-3 bg-white text-slate-900 rounded font-bold hover:bg-gray-200 transition">
+                        <i class="fas fa-envelope"></i> Email Me
+                    </a>
+                    <a href="https://scholar.google.com.hk/citations?user=m5TcEMQAAAAJ&hl=zh-CN" target="_blank" class="flex items-center gap-2 px-6 py-3 border border-slate-600 rounded text-slate-300 hover:border-white hover:text-white transition bg-slate-800/50">
+                        <i class="fas fa-graduation-cap"></i> Google Scholar
+                    </a>
+                    <a href="https://www.researchgate.net/profile/Chao-Liu-80/publications" target="_blank" class="flex items-center gap-2 px-6 py-3 border border-slate-600 rounded text-slate-300 hover:border-white hover:text-white transition bg-slate-800/50">
+                        <i class="fab fa-researchgate"></i> ResearchGate
+                    </a>
+                </div>
+                
+                <div class="mt-6 text-sm text-slate-500 font-mono">
+                    <i class="fas fa-map-marker-alt mr-2"></i> 青岛市黄岛区三沙路1299号信息南楼A413
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         BIOGRAPHY
+         ========================================== -->
+    <section id="biography" class="py-16 bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 flex items-center">
+                <span class="text-tech-accent mr-2">/</span> 基本信息
+            </h2>
+            <div class="tech-card p-8 rounded-xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-10">
+                    <i class="fas fa-user-circle text-9xl"></i>
+                </div>
+                <p class="text-lg leading-relaxed text-slate-300 text-justify">
+                    刘超，副教授，博士生导师，<b>山东省优秀青年基金获得者</b>，山东省青创团队带头人，青岛市产业领军人才，IEEE Senior Member，IEEE 1851工作组主席，ISO 21851国际标准工作组副主席，IEEE INFOCOM Advisory TPC Member，ACM SIGAPP China执行委员，ACM SIGBED China青年委员，CCF物联网专委会执行委员，CCF普适计算专委会执行委员。
+                </p>
+                <br>
+                <p class="text-lg leading-relaxed text-slate-300 text-justify">
+                    长期从事<span class="text-tech-accent">智能感知、智能人机交互、物联网和普适计算</span>的研究工作。先后主持参与了国家自然科学基金重大仪器专项、国家重点研发计划、国家自然科学基金青年项目、国家自然科学基金面上项目和中国博士后科学基金等10余项国家级、省部级课题。
+                </p>
+                <br>
+                <p class="text-lg leading-relaxed text-slate-300 text-justify">
+                    在包括CCS(Big 4)、JSAC、IMWUT/UbiComp、INFOCOM、ICDCS、TMC、TOSN等知名国际期刊和国际会议发表学术论文70余篇。曾获<strong class="text-red-400">CCS 2024（CCF A类会议）杰出论文奖</strong>、ACM China SIGAPP新星奖、山东省教学成果奖（高等教育类）一等奖等奖励。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         RESEARCH DIRECTIONS (Image Cards)
+         ========================================== -->
+    <section id="research" class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 flex items-center">
+                <span class="text-tech-accent mr-2">/</span> 研究方向
+            </h2>
+            <p class="text-slate-400 mb-8">
+                智能感知、无线感知、声波感知、人机交互和物联网。近期研究兴趣主要集中在智能无线感知、人机交互和移动计算。
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Research Card 1 -->
+                <a href="https://www.bilibili.com/video/BV1ty4y1a7YT/" target="_blank" class="group relative overflow-hidden rounded-xl border border-slate-700 aspect-video block">
+                    <img src="./data/1.png" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Acoustic+Sensing'" alt="声波感知" class="w-full h-full object-cover transition duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
+                    <div class="absolute bottom-0 left-0 p-4">
+                        <h3 class="text-lg font-bold text-white group-hover:text-tech-accent transition">非接触式声波感知技术</h3>
+                        <p class="text-xs text-slate-400 mt-1"><i class="fas fa-play-circle"></i> Watch Demo</p>
+                    </div>
+                </a>
+
+                <!-- Research Card 2 -->
+                <a href="https://www.bilibili.com/video/BV16c411r7w3/" target="_blank" class="group relative overflow-hidden rounded-xl border border-slate-700 aspect-video block">
+                    <img src="./data/3.png" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Face+ID'" alt="人脸识别" class="w-full h-full object-cover transition duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
+                    <div class="absolute bottom-0 left-0 p-4">
+                        <h3 class="text-lg font-bold text-white group-hover:text-tech-accent transition">基于音频感知的人脸识别</h3>
+                        <p class="text-xs text-slate-400 mt-1"><i class="fas fa-play-circle"></i> Watch Demo</p>
+                    </div>
+                </a>
+
+                <!-- Research Card 3 -->
+                <a href="https://www.bilibili.com/video/BV15p4y1S7As" target="_blank" class="group relative overflow-hidden rounded-xl border border-slate-700 aspect-video block">
+                    <img src="./data/2.png" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=WiFi+Sensing'" alt="WIFI感知" class="w-full h-full object-cover transition duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
+                    <div class="absolute bottom-0 left-0 p-4">
+                        <h3 class="text-lg font-bold text-white group-hover:text-tech-accent transition">非接触式无线信号动作识别</h3>
+                        <p class="text-xs text-slate-400 mt-1"><i class="fas fa-play-circle"></i> Watch Demo</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         PUBLICATIONS (Timeline Style)
+         ========================================== -->
+    <section id="publications" class="py-16 bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold flex items-center">
+                    <span class="text-tech-accent mr-2">/</span> 近期论文
+                </h2>
+                <div class="space-x-2 text-sm">
+                    <a href="https://www.researchgate.net/profile/Chao-Liu-80/publications" class="text-tech-accent hover:underline">ResearchGate</a>
+                    <span class="text-slate-600">|</span>
+                    <a href="https://scholar.google.com.hk/citations?user=m5TcEMQAAAAJ&hl=zh-CN" class="text-tech-accent hover:underline">Google Scholar</a>
+                </div>
+            </div>
+
+            <div class="space-y-8 border-l border-slate-700 ml-3 pl-8 relative">
+                
+                <!-- Year 2025 -->
+                <div class="relative">
+                    <span class="absolute -left-11 top-0 bg-tech-bg border border-tech-accent text-tech-accent px-2 py-1 rounded text-xs font-mono font-bold">2025</span>
+                    <div class="space-y-4">
+                        <!-- Paper 1 -->
+                        <div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300">Xue Gong, Kaiwen Guo, Hao Chen, Feng Li, <b>Chao Liu*</b>. Stick, Swipe, Secure: Acoustic Cross-Device User Authentication via a Low-Cost Passive Fingerprint Sticker. <span class="text-tech-accent font-bold">IMWUT/UbiComp 2025</span>. (CCF A)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300">Hao Chen, Penghao Wang, Jingyang Hu, Feng Li, Hongbo Jiang, Minglu Li, <b>Chao Liu*</b>. Wi-GR: Wi-Fi-based Gait Recognition Using Multi-part Velocity Profile. <span class="text-tech-accent font-bold">IEEE Transactions on Mobile Computing 2025</span>. (CCF A)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300">Penghao Wang, Shuo Huai, Yetong Cao, <b>Chao Liu*</b>, Jun Luo. Threat from Windshield: Vehicle Windows as Involuntary Attack Sources on Automotive Voice Assistants. <span class="text-tech-accent font-bold">CCS 2025</span>. (CCF A, Big 4)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300">Chongxuan Ma, Zheng Xie, Kaiwen Guo, <b>Chao Liu*</b>. NFINGER: Personalized Backside Gesture Recognition on Smartphones Using Back-mounted NFC Tag Array. <span class="text-tech-accent font-bold">IMWUT/UbiComp 2025</span>. (CCF A)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300">Penghao Wang, Shujie Zhang, Chao Cai, <b>Chao Liu*</b>, Jun Luo. Sonic-Fi: Practical Vital Signs Distillation Leveraging Fine-grained Physical Resolution. <span class="text-tech-accent font-bold">IMWUT/UbiComp 2025</span>. (CCF A)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300"><b>Chao Liu</b>, Hao Chen, Jingyang Hu, Qibo Zhang, Siyu Chen, Hongbo Jiang, Penghao Wang. EchoHealth: Non-contact Rehabilitation Exercises via Active Acoustic Sensing. <span class="text-tech-accent font-bold">INFOCOM 2025</span>. (CCF A)</p>
+                        </div>
+                         <div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300">Hao Chen, Penghao Wang, Feng Hong, Zhongwen Guo, <b>Chao Liu*</b>. BEyes: Unseen Eyes Snooping Pattern Lock via BFI. <span class="text-tech-accent font-bold">ICDCS 2025</span>. (CCF B)</p>
+                        </div>
+                         <div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300"><b>Chao Liu</b>, Yipeng Liu, Feng Hong, Zhongwen Guo, Jiguo Yu, Feng Li*. Mring: Contactless MR/AR Extended Input Method based on Magnetic Signal. <span class="text-tech-accent font-bold">ACM Transactions on Sensor Networks 2025</span>. (SCI, CCF B)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300">Hui Liu, Penghao Wang, Pengyu Wang, Jingyang Hu, Hongbo Jiang, <b>Chao Liu*</b>. From Fragmentation to Correlation: Reliable LoRa Reception over Weak Marine Links. <span class="text-tech-accent font-bold">ACM Transactions on Sensor Networks 2025</span>. (SCI, CCF B)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300">Shuai Guo, Menglei Xia, Huanqun Xue, Yutong Song, Zhitian Zhang, <b>Chao Liu*</b>. MATM-SN: A Deep Reinforcement Learning Model for Ocean Sensing Task Allocation based on Generative Social Network. <span class="text-tech-accent font-bold">IEEE Internet of Things Journal 2025</span>. (SCI)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Year 2024 -->
+                <div class="relative pt-8">
+                    <span class="absolute -left-11 top-8 bg-tech-bg border border-slate-700 text-slate-400 px-2 py-1 rounded text-xs font-mono font-bold">2024</span>
+                    <div class="space-y-4">
+                        <div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300">Penghao Wang, Ruobing Jiang, Jingyang Hu, Yanmin Zhu, Hongbo Jiang, Minglu Li, <b>Chao Liu*</b>. AMT<sup>+</sup>: Acoustic Multi-target Tracking with Smartphone MIMO System. <span class="text-tech-accent font-bold">IEEE Transactions on Mobile Computing 2024</span>. (SCI, CCF A)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-red-500">
+                             <div class="flex items-start">
+                                <i class="fas fa-trophy text-red-500 mt-1 mr-3"></i>
+                                <p class="text-slate-300">Penghao Wang, Jingzhi Hu, <b>Chao Liu*</b>, Jun Luo. RefleXnoop: Passwords Snooping on NLoS Laptops Leveraging Screen-Induced Sound Reflection. <span class="text-tech-accent font-bold">CCS 2024</span>. (CCF A, Big 4, <strong class="text-red-400">Distinguished Paper Award</strong>)</p>
+                            </div>
+                        </div>
+                         <div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300">Zhaopeng Xu, Tong Liu, Ruobing Jiang, Pengfei Hu, Zhongwen Guo, <b>Chao Liu*</b>. AFace: Range-flexible Anti-spoofing Face Authentication via Smartphone Acoustic Sensing. <span class="text-tech-accent font-bold">IMWUT/UbiComp 2024</span>. (CCF A)</p>
+                        </div>
+                         <div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300">Penghao Wang, Ruobing Jiang, <b>Chao Liu*</b>, Jun Luo. AGR: Acoustic Gait Recognition Using Interpretable Micro-Range Profile. <span class="text-tech-accent font-bold">INFOCOM 2024</span>. (CCF A)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300">Shuai Guo, Meilei Xia, Huanqun Xue, Shuang Wang, <b>Chao Liu*</b>. OceanCrowd: Vessel Trajectory Data-based Participant Selection for Mobile Crowd Sensing in Ocean Observation. <span class="text-tech-accent font-bold">IEEE Transactions on Sustainable Computing 2024</span>. (SCI)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300">Haotian Zhang, Lukun Wang, Jiaming Pei, Feng Lyu, Minglu Li, <b>Chao Liu*</b>. RF-Sign: Position-Independent Sign Language Recognition Using Passive RFID Tags. <span class="text-tech-accent font-bold">IEEE Internet of Things Journal 2024</span>. (SCI)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300">Yang Wang, Feng Hong, Yufei Jiang, Chenyu Bao, <b>Chao Liu</b>, Zhongwen Guo. ToothFairy: Real-time Tooth-by-tooth Brushing Monitor using Earphone Reversed Signals. <span class="text-tech-accent font-bold">IMWUT/UbiComp 2024</span>. (CCF A)</p>
+                        </div>
+                         <div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300">Lina Wang, Huan Yang, Yiran Shen, <b>Chao Liu</b>, Lianyong Qi, Xiuzhen Cheng, Feng Li. PDSR: A Privacy-Preserving Diversified ServiceRecommendation Method on Distributed Data. <span class="text-tech-accent font-bold">IEEE Transactions on Services Computing 2024</span>. (SCI, CCF A)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300">Chengwu Liao, Chao Chen, Wanyi Zhang, Suiming Guo, <b>Chao Liu</b>. AGENDA: Predicting Trip Purposes with A New Graph Embedding Network and Active Domain Adaptation. <span class="text-tech-accent font-bold">ACM Transactions on Knowledge Discovery from Data 2024</span>. (SCI, CCF B)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300">Siyu Chen, Hongbo Jiang, Jie Xiong, Jingyang Hu, Penghao Wang, <b>Chao Liu</b>, Zhu Xiao, Bo Li. BeamCount: Indoor Crowd Counting Using Wi-Fi Beamforming Feedback Information. <span class="text-tech-accent font-bold">MobiHoc 2024</span>. (CCF B)</p>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Year 2023 -->
+                <div class="relative pt-8">
+                     <span class="absolute -left-11 top-8 bg-tech-bg border border-slate-700 text-slate-400 px-2 py-1 rounded text-xs font-mono font-bold">2023</span>
+                    <div class="space-y-4">
+                        <div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                             <p class="text-slate-300">Hui Xia, Shuo Xu, Jiaming Pei, Rui Zhang, Zhi Yu, Weitao Zou, Lukun Wang, <b>Chao Liu*</b>. FedME<sup>2</sup>: Memory Evaluation & Erase Promoting Federated Unlearning in DTMN. <span class="text-tech-accent font-bold">IEEE Journal on Selected Areas in Communications(JSAC) 2023</span>. (SCI, CCF A)</p>
+                        </div>
+                         <div class="bg-slate-800/50 p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                             <p class="text-slate-300">Penghao Wang, Ruobing Jiang, Zhongwen Guo, <b>Chao Liu*</b>. Afitness: Fitness Monitoring on Smart Devices via Acoustic Motion Images. <span class="text-tech-accent font-bold">ACM Transactions on Sensor Networks 2023</span>. (SCI, CCF B)</p>
+                        </div>
+                        <!-- ... 更多 2023 论文请按照此格式复制 ... -->
+                        <div class="text-center py-2">
+                             <a href="https://www.researchgate.net/profile/Chao-Liu-80/publications" class="text-sm text-slate-500 hover:text-white border-b border-dashed border-slate-500">View More in 2023 & Before...</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         PROJECTS / FUNDING
+         ========================================== -->
+    <section id="projects" class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 flex items-center">
+                <span class="text-tech-accent mr-2">/</span> 研究项目 & 经费
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Funding Item -->
+                <div class="tech-card p-6 rounded-lg">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-mono text-tech-purple bg-tech-purple/10 px-2 py-1 rounded">2023/01-2026/12</span>
+                        <span class="text-xs font-bold text-slate-400">¥700,000</span>
+                    </div>
+                    <h3 class="font-bold text-white mb-2">国家自然科学基金面上项目</h3>
+                    <p class="text-sm text-slate-400">面向泛在场景的非接触式声波感知关键技术研究 (#62272427) (位次1)</p>
+                </div>
+                
+                 <div class="tech-card p-6 rounded-lg">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-mono text-tech-purple bg-tech-purple/10 px-2 py-1 rounded">2025/10-2028/09</span>
+                        <span class="text-xs font-bold text-slate-400">¥500,000</span>
+                    </div>
+                    <h3 class="font-bold text-white mb-2">山东省优秀青年基金</h3>
+                    <p class="text-sm text-slate-400">泛在无线智能感知 (#ZR2025QB43) (位次1)</p>
+                </div>
+
+                 <div class="tech-card p-6 rounded-lg">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-mono text-tech-purple bg-tech-purple/10 px-2 py-1 rounded">2025/08-2025/10</span>
+                        <span class="text-xs font-bold text-slate-400">¥473,300</span>
+                    </div>
+                    <h3 class="font-bold text-white mb-2">高校外协横向课题</h3>
+                    <p class="text-sm text-slate-400">(位次1)</p>
+                </div>
+
+                 <div class="tech-card p-6 rounded-lg">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-mono text-tech-purple bg-tech-purple/10 px-2 py-1 rounded">2025/07-2026/07</span>
+                        <span class="text-xs font-bold text-slate-400">¥300,000</span>
+                    </div>
+                    <h3 class="font-bold text-white mb-2">应急管理部重点实验室开放课题</h3>
+                    <p class="text-sm text-slate-400">基于深度学习的电芯故障识别和热失控预测技术 (#EES2025KF22) (位次1)</p>
+                </div>
+
+                 <div class="tech-card p-6 rounded-lg">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-mono text-tech-purple bg-tech-purple/10 px-2 py-1 rounded">2025/01-2027/12</span>
+                        <span class="text-xs font-bold text-slate-400">¥100,000</span>
+                    </div>
+                    <h3 class="font-bold text-white mb-2">算力互联网与信息安全教育部重点实验室重点课题</h3>
+                    <p class="text-sm text-slate-400">基于边缘算力网的大规模视频分析系统资源调度机制研究 (#2024ZD003) (位次1)</p>
+                </div>
+
+                 <!-- 更多项目可以按照此格式添加 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         STANDARDS & AWARDS (Compact List)
+         ========================================== -->
+    <section class="py-16 bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Standards -->
+            <div>
+                 <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-book mr-3 text-tech-accent"></i> 标准与著作
+                </h2>
+                <ul class="space-y-3 text-sm text-slate-300">
+                    <li class="flex items-start"><i class="fas fa-check text-tech-accent mt-1 mr-2"></i> IEEE 1851-2023: IEEE Standard for Design Criteria of Integrated Sensor-Based Test Applications for Household Appliances. (Chair)</li>
+                    <li class="flex items-start"><i class="fas fa-check text-tech-accent mt-1 mr-2"></i> ISO 21851-2020: Marine technology — Ocean observation systems... (Vice Chair)</li>
+                    <li class="flex items-start"><i class="fas fa-check text-tech-accent mt-1 mr-2"></i> IEEE 2735-2022: Standard for Interoperability of Complex Virtual Instruments for IoT</li>
+                    <li class="flex items-start"><i class="fas fa-check text-tech-accent mt-1 mr-2"></i> 郭忠文，刘超，王玺 著，《物联网工程设计与开发》，科学出版社“十四五”普通高等教育本科规划教材.</li>
+                </ul>
+            </div>
+
+            <!-- Awards -->
+            <div>
+                 <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-medal mr-3 text-yellow-500"></i> 荣誉与奖励
+                </h2>
+                 <ul class="space-y-3 text-sm text-slate-300 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
+                    <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2"></i> 2025 山东省优秀青年基金获得者</li>
+                    <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2"></i> <span class="font-bold text-white">2024 ACM CCS Distinguished Paper Award</span> (with Penghao Wang, Jingzhi Hu, Jun Luo)</li>
+                    <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2"></i> 2025 青岛市产业领军人才</li>
+                    <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2"></i> 2025 中国海洋大学研究生优秀成果一等奖</li>
+                    <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2"></i> 2020 ACM China SIGAPP 新星奖</li>
+                    <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2"></i> IEEE 1851 杰出贡献奖励</li>
+                    <!-- More awards -->
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         EXPERIENCE
+         ========================================== -->
+    <section id="experience" class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+             <h2 class="text-3xl font-bold mb-8 flex items-center">
+                <span class="text-tech-accent mr-2">/</span> 教育及工作经历
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Education -->
+                <div class="tech-card p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2"><i class="fas fa-graduation-cap mr-2"></i> 教育经历</h3>
+                    <ul class="space-y-4">
+                        <li class="relative pl-6 border-l border-slate-600">
+                            <div class="absolute -left-1.5 top-1.5 w-3 h-3 bg-tech-accent rounded-full"></div>
+                            <span class="text-xs text-tech-accent font-mono">2014/10－2015/10</span>
+                            <p class="font-bold text-white">伊利诺伊理工大学 (IIT)</p>
+                            <p class="text-sm text-slate-400">联合培养博士</p>
+                        </li>
+                        <li class="relative pl-6 border-l border-slate-600">
+                            <div class="absolute -left-1.5 top-1.5 w-3 h-3 bg-tech-accent rounded-full"></div>
+                            <span class="text-xs text-tech-accent font-mono">2011/09－2016/07</span>
+                            <p class="font-bold text-white">中国海洋大学</p>
+                            <p class="text-sm text-slate-400">计算机系统结构，博士</p>
+                        </li>
+                         <li class="relative pl-6 border-l border-slate-600">
+                            <div class="absolute -left-1.5 top-1.5 w-3 h-3 bg-tech-accent rounded-full"></div>
+                            <span class="text-xs text-tech-accent font-mono">2007/09－2011/07</span>
+                            <p class="font-bold text-white">中国海洋大学</p>
+                            <p class="text-sm text-slate-400">计算机科学与技术，学士</p>
+                        </li>
+                    </ul>
+                </div>
+                
+                 <!-- Work & Service -->
+                <div class="tech-card p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2"><i class="fas fa-briefcase mr-2"></i> 工作与兼职</h3>
+                     <ul class="space-y-4">
+                        <li class="relative pl-6 border-l border-slate-600">
+                            <div class="absolute -left-1.5 top-1.5 w-3 h-3 bg-tech-purple rounded-full"></div>
+                            <span class="text-xs text-tech-purple font-mono">2016/7－今</span>
+                            <p class="font-bold text-white">中国海洋大学</p>
+                            <p class="text-sm text-slate-400">讲师，副教授</p>
+                        </li>
+                        <li class="mt-4">
+                            <p class="font-bold text-white mb-1">学术兼职：</p>
+                            <p class="text-xs text-slate-400 leading-relaxed">
+                                IEEE 1851国际标准工作组主席、ISO 21851国际标准工作组副主席、IEEE INFOCOM Advisory TPC Member、CCF物联网专委会执行委员、CCF普适计算专委会执行委员、 ACM SIGAPP China 执行委员会委员...
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         JOIN US / FOOTER
+         ========================================== -->
+    <section id="joinus" class="py-20 relative overflow-hidden">
+        <!-- 背景装饰 -->
+        <div class="absolute inset-0 bg-gradient-to-br from-tech-bg via-tech-card to-slate-900 z-[-1]"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-6 text-white">加入我们</h2>
+            <div class="tech-card p-8 rounded-2xl text-left border-t-4 border-t-tech-accent">
+                <p class="text-slate-300 mb-6">
+                    我们的团队主要面向前沿移动计算、智能感知相关问题展开研究。主要成果目标为CCF A、B类顶尖会议、期刊。<br>
+                    可提前阅读论文：<a href="https://arxiv.org/pdf/1901.03450.pdf" class="text-tech-accent underline">Intro Paper PDF</a>
+                </p>
+                <div class="space-y-2 mb-8">
+                    <h4 class="font-bold text-white">招生要求：</h4>
+                    <ol class="list-decimal list-inside text-slate-400 space-y-1">
+                        <li>有良好的数学基础（高等数学、线性代数）和动手能力；</li>
+                        <li>具备复变函数、信号分析相关的基本知识优先；</li>
+                        <li>有ACM竞赛相关获奖经历优先；</li>
+                        <li>如果你以上3条都不具备，但非常勤奋，做好了刻苦奋斗3年的准备，也可以联系我。</li>
+                    </ol>
+                </div>
+                <div class="text-center">
+                    <a href="mailto:liuchao@ouc.edu.cn" class="inline-block px-8 py-4 bg-tech-accent text-slate-900 font-bold rounded-full hover:bg-white hover:scale-105 transition shadow-lg shadow-tech-accent/25">
+                        <i class="fas fa-paper-plane mr-2"></i> 联系我: liuchao@ouc.edu.cn
+                    </a>
+                </div>
+            </div>
+            
+            <footer class="mt-16 text-slate-600 text-sm">
+                <p>&copy; 2025 Chao Liu. Ocean University of China.</p>
+                <p>Designed with <i class="fas fa-heart text-red-500"></i> & Code.</p>
+            </footer>
+        </div>
+    </section>
+
+    <!-- Canvas Animation Script -->
+    <script>
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+
+        // 初始化 Canvas 尺寸
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        // 粒子类
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.fillStyle = 'rgba(56, 189, 248, 0.5)'; // Cyan color
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // 初始化粒子
+        function init() {
+            particles = [];
+            for (let i = 0; i < 50; i++) { // 粒子数量
+                particles.push(new Particle());
+            }
+        }
+
+        // 动画循环
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // 绘制连线
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 150) {
+                        ctx.strokeStyle = `rgba(56, 189, 248, ${0.1 - distance/1500})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+        init();
+        animate();
+    </script>
 </body>
 </html>
