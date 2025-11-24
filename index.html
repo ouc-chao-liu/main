@@ -1,475 +1,890 @@
-
-
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
-<meta name="description" content="Chao Liu, Ocean University of China" />
-<title>Chao Liu's Homepage</title>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chao Liu, Ocean University of China">
+    <title>Chao Liu (刘超) | OUC</title>
+    
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 引入 FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- 引入 Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-<!-- CSS  -->
-<link href="materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection">
-<link href="aos.css" type="text/css" rel="stylesheet" media="screen,projection">
-<link href="style.css" type="text/css" rel="stylesheet" media="screen,projection">
-
-<!-- Place your kit's code here -->
-<script src="https://kit.fontawesome.com/fed508a68e.js" crossorigin="anonymous"></script>
-
-<style>
-div.noshow { display: none; }
-div.bibtex {
-	margin-right: 10%;
-	margin-top: 1em;
-	margin-bottom: 1em;
-	padding: 0.2em 0.5em;
-	background: #F8F9F9;
-}
-div.bibtex pre { font-family: Georgia, Times, Arial; font-size: 85%; overflow: auto;  width: 100%; padding: 0em 0em;}
-</style> 
-
-<script type="text/javascript">
-    <!--
-    // Toggle Display of BibTeX
-    function toggleBibtex(articleid) {
-        var bib = document.getElementById('bib_'+articleid);
-        if (bib) {
-            if(bib.className.indexOf('bibtex') != -1) {
-                bib.className.indexOf('noshow') == -1?bib.className = 'bibtex noshow':bib.className = 'bibtex';
+    <!-- Tailwind 配置 -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        tech: {
+                            bg: '#0B1120',      
+                            card: '#1E293B',    
+                            accent: '#38BDF8',  
+                            purple: '#A855F7',  
+                            text: '#E2E8F0',    
+                            muted: '#94A3B8'    
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
             }
-        } else {
-            return;
         }
-    }
--->
-</script>
+    </script>
 
-</head>
-<body data-aos-easing="ease" data-aos-duration="400" data-aos-delay="0">
+    <style>
+        body {
+            background-color: #0B1120;
+            color: #E2E8F0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0B1120; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
 
+        .tech-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(56, 189, 248, 0.1);
+            transition: all 0.3s ease;
+        }
+        .tech-card:hover {
+            border-color: rgba(56, 189, 248, 0.5);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.1);
+            transform: translateY(-2px);
+        }
 
+        .glass-nav {
+            background: rgba(11, 17, 32, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
 
-  
-<div class="navbar-fixed">
-  <nav class="white">
-    <div class="nav-wrapper container"><a id="logo-container" class="brand-logo"></a>
-      <ul class="left">
-        <li><a class="nav-item waves-effect waves-light active" href="./index.html">Home</a></li>
-        <li><a class="nav-item waves-effect waves-light active" href="#Biography">Biography</a></li>
-        <li><a class="nav-item waves-effect waves-light active" href="#Experience">Experience</a></li>
-        <li><a class="nav-item waves-effect waves-light active" href="#Funding">Funding</a></li>
-        <li><a class="nav-item waves-effect waves-light active" href="#Publications">Publications</a></li>
-	<li><a class="nav-item waves-effect waves-light active" href="#Requirements">Requirements</a></li>
+        #canvas-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.6;
+        }
         
-      </ul>
-    </div>
-  </nav>
-</div>
-  
+        /* 列表项样式优化 */
+        .list-icon-check li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .list-icon-check li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 0.2rem;
+            color: #38BDF8; /* tech-accent */
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-tech-accent selection:text-white">
 
-<!--==========================================
-                   Profile
-===========================================-->
+    <canvas id="canvas-bg"></canvas>
 
-<div id="home" class="parallax-container scrollspy">
-  <div class="container row cover-block">
-    <div class="profile-image-block col s12 m12 l4 center">
-        <img class="responsive-img profile-photo z-depth-2" src="data/lc.jpg" style="width: 50%; height: 50%">
-    </div>
+    <!-- 导航栏 -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-xl font-bold font-mono tracking-tighter text-white">
+                        CHAO<span class="text-tech-accent">.LIU</span>
+                    </a>
+                </div>
+                <div class="hidden lg:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#home" class="hover:text-tech-accent px-3 py-2 rounded-md text-sm font-medium transition-colors">首页</a>
+                        <a href="#biography" class="hover:text-tech-accent px-3 py-2 rounded-md text-sm font-medium transition-colors">简介</a>
+                        <a href="#publications" class="hover:text-tech-accent px-3 py-2 rounded-md text-sm font-medium transition-colors">论文</a>
+                        <a href="#projects" class="hover:text-tech-accent px-3 py-2 rounded-md text-sm font-medium transition-colors">项目</a>
+                        <a href="#standards" class="hover:text-tech-accent px-3 py-2 rounded-md text-sm font-medium transition-colors">标准/专利/奖励</a>
+                        <a href="#experience" class="hover:text-tech-accent px-3 py-2 rounded-md text-sm font-medium transition-colors">经历</a>
+                        <a href="#joinus" class="px-4 py-2 rounded bg-tech-accent text-slate-900 font-bold hover:bg-sky-300 transition-colors text-sm">招生</a>
+                    </div>
+                </div>
+                 <!-- 移动端菜单按钮 -->
+                 <div class="-mr-2 flex lg:hidden">
+                    <button type="button" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 移动端菜单面板 -->
+        <div class="hidden lg:hidden bg-slate-900 border-b border-gray-800" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">首页</a>
+                <a href="#biography" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">简介</a>
+                <a href="#publications" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">论文</a>
+                <a href="#projects" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">项目</a>
+                <a href="#standards" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">荣誉</a>
+                <a href="#joinus" class="text-tech-accent block px-3 py-2 rounded-md text-base font-bold">招生</a>
+            </div>
+        </div>
+    </nav>
 
-    <div class="profile-content-block col s12 m12 l8">
-        <h5 class="profile-name">Chao Liu (刘超)</h5>
-        <hr>
-		<p class="profile-link"><b>山东省优秀青年基金获得者、山东省青创团队带头人</b></a></p>
-        <p class="profile-link"><a href="http://it.ouc.edu.cn/cs" target="blank">计算机科学与技术学院-博士生导师</a></p>
-        <p class="profile-link"><a href="http://www.ouc.edu.cn" target="blank">Ocean University of China</a></p>        
-        <p class="profile-link">Email: liuchao at ouc dot edu dot cn</a></p>
-        <p class="profile-link">Office: 青岛市黄岛区三沙路1299号信息南楼A413</a></p>
-        <h1></h1>
+    <!-- ==========================================
+         HOME
+         ========================================== -->
+    <section id="home" class="pt-32 pb-16 lg:pt-40 lg:pb-24 px-4 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <!-- 头像区域 (已调小) -->
+            <div class="lg:col-span-4 flex justify-center lg:justify-end order-1 lg:order-2">
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-tech-accent to-tech-purple rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+                    <!-- 尺寸调整：w-48 h-48 (mobile) / sm:w-60 sm:h-60 (desktop) -->
+                    <div class="relative w-48 h-48 sm:w-60 sm:h-60 rounded-lg overflow-hidden border-2 border-slate-700 bg-slate-800">
+                        <img src="data/lc.jpg" 
+                             onerror="this.src='https://ui-avatars.com/api/?name=Chao+Liu&background=0D8ABC&color=fff&size=256'" 
+                             alt="Chao Liu Profile" 
+                             class="w-full h-full object-cover transform transition duration-500 group-hover:scale-105">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 文字区域 -->
+            <div class="lg:col-span-8 order-2 lg:order-1 text-center lg:text-left">
+                <div class="inline-block px-3 py-1 mb-4 text-xs font-mono text-tech-accent bg-tech-accent/10 rounded-full border border-tech-accent/20">
+                    PROFESSOR / RESEARCHER
+                </div>
+                <h1 class="text-4xl sm:text-5xl font-bold tracking-tight mb-4 text-white">
+                    Chao Liu <span class="text-tech-muted text-2xl align-middle font-light">(刘超)</span>
+                </h1>
+                
+                <div class="space-y-2 text-base sm:text-lg text-tech-muted font-light mb-6">
+                    <p class="flex items-center justify-center lg:justify-start gap-2">
+                        <i class="fas fa-university text-tech-purple"></i>
+                        <a href="http://www.ouc.edu.cn" target="_blank" class="hover:text-white transition">中国海洋大学 (Ocean University of China)</a>
+                    </p>
+                    <p class="flex items-center justify-center lg:justify-start gap-2">
+                        <i class="fas fa-graduation-cap text-tech-accent"></i>
+                        <a href="http://it.ouc.edu.cn/cs" target="_blank" class="hover:text-white transition">计算机科学与技术学院 - 副教授 / 博士生导师</a>
+                    </p>
+                    <p class="text-sm font-mono text-slate-400 mt-2 lg:border-l-2 lg:border-tech-accent lg:pl-4">
+                        山东省优秀青年基金获得者 | 山东省青创团队带头人
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap gap-3 justify-center lg:justify-start text-sm">
+                    <a href="mailto:liuchao@ouc.edu.cn" class="flex items-center gap-2 px-5 py-2 bg-white text-slate-900 rounded font-bold hover:bg-gray-200 transition">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                    <a href="https://scholar.google.com.hk/citations?user=m5TcEMQAAAAJ&hl=zh-CN" target="_blank" class="flex items-center gap-2 px-5 py-2 border border-slate-600 rounded text-slate-300 hover:border-white hover:text-white transition bg-slate-800/50">
+                        <i class="fas fa-graduation-cap"></i> Scholar
+                    </a>
+                    <a href="https://www.researchgate.net/profile/Chao-Liu-80/publications" target="_blank" class="flex items-center gap-2 px-5 py-2 border border-slate-600 rounded text-slate-300 hover:border-white hover:text-white transition bg-slate-800/50">
+                        <i class="fab fa-researchgate"></i> ResearchGate
+                    </a>
+                </div>
+                <div class="mt-4 text-xs text-slate-500 font-mono">
+                    <i class="fas fa-map-marker-alt mr-2"></i> 青岛市黄岛区三沙路1299号信息南楼A413
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         BIOGRAPHY
+         ========================================== -->
+    <section id="biography" class="py-12 bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-6 flex items-center text-white">
+                <span class="text-tech-accent mr-2">/</span> 基本信息
+            </h2>
+            <div class="tech-card p-6 md:p-8 rounded-xl">
+                <p class="leading-relaxed text-slate-300 text-justify">
+                    刘超，副教授，博士生导师，<b>山东省优秀青年基金获得者</b>，山东省青创团队带头人，青岛市产业领军人才，IEEE Senior Member，IEEE 1851工作组主席，ISO 21851国际标准工作组副主席，IEEE INFOCOM Advisory TPC Member，ACM SIGAPP China执行委员，ACM SIGBED China青年委员，CCF物联网专委会执行委员，CCF普适计算专委会执行委员。
+                </p>
+                <br>
+                <p class="leading-relaxed text-slate-300 text-justify">
+                    长期从事<span class="text-tech-accent">智能感知、智能人机交互、物联网和普适计算</span>的研究工作。先后主持参与了国家自然科学基金重大仪器专项、国家重点研发计划、国家自然科学基金青年项目、国家自然科学基金面上项目和中国博士后科学基金等10余项国家级、省部级课题。
+                </p>
+                <br>
+                <p class="leading-relaxed text-slate-300 text-justify">
+                    在包括CCS(Big 4)、JSAC、IMWUT/UbiComp、INFOCOM、ICDCS、TMC、TOSN等知名国际期刊和国际会议发表学术论文70余篇。曾获<strong class="text-red-400">CCS 2024（CCF A类会议）杰出论文奖</strong>、ACM China SIGAPP新星奖、山东省教学成果奖（高等教育类）一等奖等奖励。
+                </p>
+            </div>
+        </div>
+    </section>
+
+     <!-- ==========================================
+         RESEARCH DIRECTIONS
+         ========================================== -->
+         <section id="research" class="py-12">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-2xl font-bold mb-6 flex items-center text-white">
+                    <span class="text-tech-accent mr-2">/</span> 研究方向
+                </h2>
+                <p class="text-slate-400 mb-6">
+                    智能感知、无线感知、声波感知、人机交互和物联网。近期研究兴趣主要集中在智能无线感知、人机交互和移动计算。
+                </p>
     
-        </div>    
-  </div>
-</div>
-
-
-
-<!--==========================================
-                   Biography
-===========================================-->
-<div class="row container"><a name="Biography"></a><div class="row"><br>
-<div class="title">基本信息</div><hr>
-
-<p>刘超，副教授，博士生导师，<b>山东省优秀青年基金获得者</b>，山东省青创团队带头人，青岛市产业领军人才，IEEE Senior Member，IEEE 1851工作组主席，ISO 21851国际标准工作组副主席，IEEE INFOCOM Advisory TPC Member，ACM SIGAPP China执行委员，ACM SIGBED China青年委员，CCF物联网专委会执行委员，CCF普适计算专委会执行委员
-	，长期从事智能感知、智能人机交互、物联网和普适计算的研究工作。先后主持参与了国家自然科学基金重大仪器专项、
-	国家重点研发计划、国家自然科学基金青年项目、国家自然科学基金面上项目和中国博士后科学基金等10余项国家级、省部级课题。
-	在包括CCS(Big 4)、JSAC、IMWUT/UbiComp、INFOCOM、ICDCS、TMC、TOSN等知名国际期刊和国际会议发表学术论文70余篇。曾获<strong style="color: red;"><b>CCS 2024（CCF A类会议）杰出论文奖</b></strong>、ACM China SIGAPP新星奖、山东省教学成果奖（高等教育类）一等奖等奖励。</p>
-  
- 
-</div></div>
-
-<!--==========================================
-                   Experience
-===========================================-->
-<div class="row container"><a name="Experience"></a><div class="row">
-<div class="title">教育及工作经历</div><hr>
-<ul>
-	<li>
-		<i class="fas fa-user-md"></i><b> 教育经历：</b>
-	<li>
-		2014/10－2015/10，伊利诺伊理工大学，联合培养博士
-	</li>
-	<li>
-		2011/09－2016/07，中国海洋大学，计算机系统结构，博士
-	</li>
-	<li>
-		2007/09－2011/07，中国海洋大学，计算机科学与技术，学士 
-	</li>
-	<li>
-		<i class="fas fa-user-md"></i> <b> 工作经历：</b>
-	</li>
-	<li>
-		2016/7－今 中国海洋大学，讲师，副教授；
-	</li>
-	<li>
-		<i class="fas fa-user-md"></i> <b> 学术兼职：</b>
-	</li>
-	<li>
-		IEEE 1851国际标准工作组主席、ISO 21851国际标准工作组副主席、IEEE INFOCOM Advisory TPC Member、CCF物联网专委会执行委员、CCF普适计算专委会执行委员、 ACM SIGAPP China 执行委员会委员、ACM SIGBED China青年委员、ACM China青岛分会执行委员会委员、
-		IEEE 2402国际标准工作组成员、IEEE 2735国际标准工作组成员、IEEE 2735.1 国际标准工作组成员、GB/T33137-2016国家标准工作组成员
-</ul>
-</div></div>
-
-
-<!--==========================================
-                   研究方向
-===========================================-->
-<div class="row container"><a name="Funding"></a><div class="row">
-    <div class="title">研究方向</div><hr></div>
-    <p>智能感知、无线感知、声波感知、人机交互和物联网。近期研究兴趣主要集中在智能无线感知、人机交互和移动计算。</p>
-	<div id="left" style="width:50%;float:left;">
-		<a href="https://www.bilibili.com/video/BV1ty4y1a7YT/">
-		<img src="./data/1.png" width=100%  alt="声波感知" />
-			<p style=" text-align:center;">非接触式声波感知技术</p>
-		</a></div>
-	<div id="right" style="width:50%;float:left;">
-		<a href="https://www.bilibili.com/video/BV16c411r7w3/">
-			<img src="./data/3.png" width=100%  alt="人脸识别" />
-			<p style=" text-align:center;">基于音频感知的人脸识别</p>
-		</a></div>
-	<div id="left" style="width:50%;float:left;">
-		<a href="https://www.bilibili.com/video/BV15p4y1S7As">
-			<img src="./data/2.png" width=100%  alt="WIFI感知" />
-			<p style=" text-align:center;">非接触式无线信号动作识别</p>
-		</a></div>
-</div></div>
-
-
-<!--==========================================
-                   #Funding
-===========================================-->
-<div class="row container" id="#Funding"><a name="Preprints"></a><div class="row">
-<div class="title">研究项目</div><hr>
-
-<ul type="disc">
-
-
-        <li><i class="fa fa-flag" aria-hidden="true"></i>
-	    2023/01-2026/12，国家自然科学基金面上项目“面向泛在场景的非接触式声波感知关键技术研究”（#62272427），¥700,000 ，（位次1）
-	</li>
-	<li><i class="fa fa-flag" aria-hidden="true"></i>
-	    2025/10-2028/09，山东省优秀青年基金“泛在无线智能感知”（#ZR2025QB43），¥500,000 ，（位次1）
-	</li>
-	<li><i class="fa fa-flag" aria-hidden="true"></i>
-	    2025/08-2025/10，高校外协横向课题，¥473,300 ，（位次1）
-	</li>
-	<li><i class="fa fa-flag" aria-hidden="true"></i>
-	    2025/07-2026/07，应急管理部重点实验室开放课题“基于深度学习的电芯故障识别和热失控预测技术”（#EES2025KF22），¥300,000 ，（位次1）
-	</li>
-	 <li><i class="fa fa-flag" aria-hidden="true"></i>
-	    2025/01-2027/12，算力互联网与信息安全教育部重点实验室重点课题“基于边缘算力网的大规模视频分析系统资源调度机制研究”（#2024ZD003），¥100,000 ，（位次1）
-	</li>
-	<li><i class="fa fa-flag" aria-hidden="true"></i>
-	    2023/11-2023/12，企业横向委托项目“海上5G数据传输协议研发”，¥180,000 ，（位次1）
-	</li>
-	 <li><i class="fa fa-flag" aria-hidden="true"></i>
-	    2023/01-2025/12，山东省高等学校青年创新团队“智能物联网创新团队”（2022KJ043），¥200,000 ，（位次1）
-	</li>
-	<li><i class="fa fa-flag" aria-hidden="true"></i>
-	    2022/06-2025/06，海南省自然科学基金联合项目“基于船联网的海洋移动群智感知关键技术研究”（#2021JJLH0060），¥80,000 ，（位次1）
-	</li>
-	<li><i class="fa fa-flag" aria-hidden="true"></i>
-	    2022/01-2024/12，青岛市标准化奖励资助“ISO 21851国际标准”（#QDBZH-国际标准[2020-1265]），¥180,000 ，（位次1）
-	</li>	
-	<li><i class="fa fa-flag" aria-hidden="true"></i>
-	    2020/01-2022/12，国家自然科学基金青年基金“基于多源时空大数据驱动的广海域船联网数据传输算法研究”（#61902367），¥270,000 ，（位次1）
-	</li>	
-	<li><i class="fa fa-flag" aria-hidden="true"></i>
-	    2021/05-2022/06，中国海洋大学研究生教育改革项目“前沿需求导向的物联网高端人才培养模式研究”（#HDJG21007），¥150,000 ，（位次1）
-	</li>
-	<li><i class="fa fa-flag" aria-hidden="true"></i>
-	    2018/03-2020/12，山东省自然科学基金博士基金“基于海量多维轨迹分析的船舶移动自组织网络路由算法研究”（#ZR2018BF006），¥100,000 ，（位次1）
-	</li>
-	<li><i class="fa fa-flag" aria-hidden="true"></i>
-	    2017/11-2018/11，中国博士后基金面上项目“基于移动轨迹大数据的船舶移动时空动态研究”（一等资助，#2017M620293）,¥80,000 ，（位次1）
-	</li>
-	<li><i class="fa fa-flag" aria-hidden="true"></i>
-	    2017/08-2018/08，青岛市博士后应用研究计划, ¥50,000 ，（位次1）
-	</li>
-	<li><i class="fa fa-flag" aria-hidden="true"></i>
-	    2016/10-2019/12，国家重点研发计划“海洋环境安全保障”专项，“海洋大数据分析预报技术研发”子任务（# 2016YFC1401907），¥350,000 ，（位次1）
-	</li>
-	<li><i class="fa fa-flag" aria-hidden="true"></i>
-	    2016/10–2018/12，中央高校科研基金，“海洋船舶移动轨迹大数据分析与处理关键技术研究”，¥100,000 ，（位次1）
-	</li>
-	<li><i class="fa fa-flag" aria-hidden="true"></i>
-	    2014/01–2017/12，国家自然科学基金面上项目，“传感器网络大数据处理模型关键技术研究”（#61379127），¥760,000 ，参与
-	</li>
-	<li><i class="fa fa-flag" aria-hidden="true"></i>
-	    2014/01–2017/12，国家自然科学基金面上项目，“基于移动建模的水下传感器网络时间同步理论与算法研究”(#61379128)，¥780,000 ，参与
-	</li>
-	<li><i class="fa fa-flag" aria-hidden="true"></i>
-	    2010/01–2013/12，国家自然科学基金重点项目，“移动容迟网络理论与关键技术研究”(#60933011)，¥2,600,000， 参与。
-	</li>	
-</ul>
-</div></div>
-
-
-
-<!--==========================================
-                   Standards
-===========================================-->
-<div class="row container" id="Standards"><a name="Standards"></a><div class="row">
-<div class="title">Books and Standards  </div><hr>
-
-<ol>
- 	
-<li>
-        IEEE 1851-2023: IEEE Standard for Design Criteria of Integrated Sensor-Based Test Applications for Household Appliances.（<b>Chair</b>）
-    </li>
-    <li>
-        ISO 21851-2020: Marine technology — Ocean observation systems — Design criteria of ocean hydro-meteorological observation systems reuse and interaction.(<b>Vice Chair</b>)
-    </li>
-    <li>
-        IEEE 2735-2022:  Standard for Interoperability of Complex Virtual Instruments for Internet of Things
-    </li>
-    <li>
-        IEEE 2735.1-2022: Standard Design Criteria of Complex Virtual Instruments for Household Appliance Test
-    </li>
-     <li>
-        IEEE 2402-2017: IEEE Standard Design Criteria of Complex Virtual Instruments for Ocean Observation
-    </li>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <a href="https://www.bilibili.com/video/BV1ty4y1a7YT/" target="_blank" class="group relative overflow-hidden rounded-xl border border-slate-700 aspect-video block">
+                        <img src="./data/1.png" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Acoustic+Sensing'" alt="声波感知" class="w-full h-full object-cover transition duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
+                        <div class="absolute bottom-0 left-0 p-4">
+                            <h3 class="text-lg font-bold text-white group-hover:text-tech-accent transition">非接触式声波感知技术</h3>
+                            <p class="text-xs text-slate-400 mt-1"><i class="fas fa-play-circle"></i> Watch Demo</p>
+                        </div>
+                    </a>
     
-     <li>
-         GB/T 33137-2016: 《基于传感器的产品监测软件集成接口规范》
-    </li>	
-    <li>
-        郭忠文，<b>刘超</b>，王玺 著，《物联网工程设计与开发》，科学出版社“十四五”普通高等教育本科规划教材.（ISBN：9787030723901）
-    </li>
-
+                    <a href="https://www.bilibili.com/video/BV16c411r7w3/" target="_blank" class="group relative overflow-hidden rounded-xl border border-slate-700 aspect-video block">
+                        <img src="./data/3.png" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Face+ID'" alt="人脸识别" class="w-full h-full object-cover transition duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
+                        <div class="absolute bottom-0 left-0 p-4">
+                            <h3 class="text-lg font-bold text-white group-hover:text-tech-accent transition">基于音频感知的人脸识别</h3>
+                            <p class="text-xs text-slate-400 mt-1"><i class="fas fa-play-circle"></i> Watch Demo</p>
+                        </div>
+                    </a>
     
+                    <a href="https://www.bilibili.com/video/BV15p4y1S7As" target="_blank" class="group relative overflow-hidden rounded-xl border border-slate-700 aspect-video block">
+                        <img src="./data/2.png" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=WiFi+Sensing'" alt="WIFI感知" class="w-full h-full object-cover transition duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
+                        <div class="absolute bottom-0 left-0 p-4">
+                            <h3 class="text-lg font-bold text-white group-hover:text-tech-accent transition">非接触式无线信号动作识别</h3>
+                            <p class="text-xs text-slate-400 mt-1"><i class="fas fa-play-circle"></i> Watch Demo</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
 
-</ol>
+    <!-- ==========================================
+         PUBLICATIONS (FULL LIST)
+         ========================================== -->
+    <section id="publications" class="py-12 bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-8 flex items-center text-white">
+                <span class="text-tech-accent mr-2">/</span> 近期论文
+            </h2>
 
-</div></div>
+            <div class="space-y-8 border-l border-slate-700 ml-3 pl-6 sm:pl-8 relative">
+                
+                <!-- 2025 -->
+                <div class="relative">
+                    <span class="absolute -left-10 sm:-left-12 top-0 bg-tech-bg border border-tech-accent text-tech-accent px-2 py-1 rounded text-xs font-mono font-bold">2025</span>
+                    <div class="space-y-4">
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300 text-sm sm:text-base">Xue Gong, Kaiwen Guo, Hao Chen, Feng Li, <b>Chao Liu*</b>. Stick, Swipe, Secure: Acoustic Cross-Device User Authentication via a Low-Cost Passive Fingerprint Sticker. <span class="text-tech-accent font-bold">IMWUT/UbiComp 2025</span>. (CCF A)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300 text-sm sm:text-base">Hao Chen, Penghao Wang, Jingyang Hu, Feng Li, Hongbo Jiang, Minglu Li, <b>Chao Liu*</b>. Wi-GR: Wi-Fi-based Gait Recognition Using Multi-part Velocity Profile. <span class="text-tech-accent font-bold">IEEE Transactions on Mobile Computing 2025</span>. (CCF A)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300 text-sm sm:text-base">Penghao Wang, Shuo Huai, Yetong Cao, <b>Chao Liu*</b>, Jun Luo. Threat from Windshield: Vehicle Windows as Involuntary Attack Sources on Automotive Voice Assistants. <span class="text-tech-accent font-bold">CCS 2025</span>. (CCF A, Big 4)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300 text-sm sm:text-base">Chongxuan Ma, Zheng Xie, Kaiwen Guo, <b>Chao Liu*</b>. NFINGER: Personalized Backside Gesture Recognition on Smartphones Using Back-mounted NFC Tag Array. <span class="text-tech-accent font-bold">IMWUT/UbiComp 2025</span>. (CCF A)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300 text-sm sm:text-base">Penghao Wang, Shujie Zhang, Chao Cai, <b>Chao Liu*</b>, Jun Luo. Sonic-Fi: Practical Vital Signs Distillation Leveraging Fine-grained Physical Resolution. <span class="text-tech-accent font-bold">IMWUT/UbiComp 2025</span>. (CCF A)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300 text-sm sm:text-base"><b>Chao Liu</b>, Hao Chen, Jingyang Hu, Qibo Zhang, Siyu Chen, Hongbo Jiang, Penghao Wang. EchoHealth: Non-contact Rehabilitation Exercises via Active Acoustic Sensing. <span class="text-tech-accent font-bold">INFOCOM 2025</span>. (CCF A)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300 text-sm sm:text-base">Hao Chen, Penghao Wang, Feng Hong, Zhongwen Guo, <b>Chao Liu*</b>. BEyes: Unseen Eyes Snooping Pattern Lock via BFI. <span class="text-tech-accent font-bold">ICDCS 2025</span>. (CCF B)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300 text-sm sm:text-base"><b>Chao Liu</b>, Yipeng Liu, Feng Hong, Zhongwen Guo, Jiguo Yu, Feng Li*. Mring: Contactless MR/AR Extended Input Method based on Magnetic Signal. <span class="text-tech-accent font-bold">ACM Transactions on Sensor Networks 2025</span>. (SCI, CCF B)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300 text-sm sm:text-base">Hui Liu, Penghao Wang, Pengyu Wang, Jingyang Hu, Hongbo Jiang, <b>Chao Liu*</b>. From Fragmentation to Correlation: Reliable LoRa Reception over Weak Marine Links. <span class="text-tech-accent font-bold">ACM Transactions on Sensor Networks 2025</span>. (SCI, CCF B)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300 text-sm sm:text-base">Shuai Guo, Menglei Xia, Huanqun Xue, Yutong Song, Zhitian Zhang, <b>Chao Liu*</b>. MATM-SN: A Deep Reinforcement Learning Model for Ocean Sensing Task Allocation based on Generative Social Network. <span class="text-tech-accent font-bold">IEEE Internet of Things Journal 2025</span>. (SCI)</p>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- 2024 -->
+                <div class="relative pt-8">
+                    <span class="absolute -left-10 sm:-left-12 top-8 bg-tech-bg border border-slate-700 text-slate-400 px-2 py-1 rounded text-xs font-mono font-bold">2024</span>
+                    <div class="space-y-4">
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300 text-sm sm:text-base">Penghao Wang, Ruobing Jiang, Jingyang Hu, Yanmin Zhu, Hongbo Jiang, Minglu Li, <b>Chao Liu*</b>. AMT<sup>+</sup>: Acoustic Multi-target Tracking with Smartphone MIMO System. <span class="text-tech-accent font-bold">IEEE Transactions on Mobile Computing 2024</span>. (SCI, CCF A)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-red-500">
+                             <div class="flex items-start">
+                                <i class="fas fa-trophy text-red-500 mt-1 mr-3 flex-shrink-0"></i>
+                                <p class="text-slate-300 text-sm sm:text-base">Penghao Wang, Jingzhi Hu, <b>Chao Liu*</b>, Jun Luo. RefleXnoop: Passwords Snooping on NLoS Laptops Leveraging Screen-Induced Sound Reflection. <span class="text-tech-accent font-bold">CCS 2024</span>. (CCF A, Big 4, <strong class="text-red-400">Distinguished Paper Award</strong>)</p>
+                            </div>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300 text-sm sm:text-base">Zhaopeng Xu, Tong Liu, Ruobing Jiang, Pengfei Hu, Zhongwen Guo, <b>Chao Liu*</b>. AFace: Range-flexible Anti-spoofing Face Authentication via Smartphone Acoustic Sensing. <span class="text-tech-accent font-bold">IMWUT/UbiComp 2024</span>. (CCF A)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300 text-sm sm:text-base">Penghao Wang, Ruobing Jiang, <b>Chao Liu*</b>, Jun Luo. AGR: Acoustic Gait Recognition Using Interpretable Micro-Range Profile. <span class="text-tech-accent font-bold">INFOCOM 2024</span>. (CCF A)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300 text-sm sm:text-base">Shuai Guo, Meilei Xia, Huanqun Xue, Shuang Wang, <b>Chao Liu*</b>. OceanCrowd: Vessel Trajectory Data-based Participant Selection for Mobile Crowd Sensing in Ocean Observation. <span class="text-tech-accent font-bold">IEEE Transactions on Sustainable Computing 2024</span>. (SCI)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300 text-sm sm:text-base">Haotian Zhang, Lukun Wang, Jiaming Pei, Feng Lyu, Minglu Li, <b>Chao Liu*</b>. RF-Sign: Position-Independent Sign Language Recognition Using Passive RFID Tags. <span class="text-tech-accent font-bold">IEEE Internet of Things Journal 2024</span>. (SCI)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300 text-sm sm:text-base">Yang Wang, Feng Hong, Yufei Jiang, Chenyu Bao, <b>Chao Liu</b>, Zhongwen Guo. ToothFairy: Real-time Tooth-by-tooth Brushing Monitor using Earphone Reversed Signals. <span class="text-tech-accent font-bold">IMWUT/UbiComp 2024</span>. (CCF A)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300 text-sm sm:text-base">Lina Wang, Huan Yang, Yiran Shen, <b>Chao Liu</b>, Lianyong Qi, Xiuzhen Cheng, Feng Li. PDSR: A Privacy-Preserving Diversified ServiceRecommendation Method on Distributed Data. <span class="text-tech-accent font-bold">IEEE Transactions on Services Computing 2024</span>. (SCI, CCF A)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300 text-sm sm:text-base">Chengwu Liao, Chao Chen, Wanyi Zhang, Suiming Guo, <b>Chao Liu</b>. AGENDA: Predicting Trip Purposes with A New Graph Embedding Network and Active Domain Adaptation. <span class="text-tech-accent font-bold">ACM Transactions on Knowledge Discovery from Data 2024</span>. (SCI, CCF B)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300 text-sm sm:text-base">Siyu Chen, Hongbo Jiang, Jie Xiong, Jingyang Hu, Penghao Wang, <b>Chao Liu</b>, Zhu Xiao, Bo Li. BeamCount: Indoor Crowd Counting Using Wi-Fi Beamforming Feedback Information. <span class="text-tech-accent font-bold">MobiHoc 2024</span>. (CCF B)</p>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- 2023 -->
+                <div class="relative pt-8">
+                    <span class="absolute -left-10 sm:-left-12 top-8 bg-tech-bg border border-slate-700 text-slate-400 px-2 py-1 rounded text-xs font-mono font-bold">2023</span>
+                    <div class="space-y-4">
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                             <p class="text-slate-300 text-sm sm:text-base">Hui Xia, Shuo Xu, Jiaming Pei, Rui Zhang, Zhi Yu, Weitao Zou, Lukun Wang, <b>Chao Liu*</b>. FedME<sup>2</sup>: Memory Evaluation & Erase Promoting Federated Unlearning in DTMN. <span class="text-tech-accent font-bold">IEEE Journal on Selected Areas in Communications(JSAC) 2023</span>. (SCI, CCF A)</p>
+                        </div>
+                         <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                             <p class="text-slate-300 text-sm sm:text-base">Penghao Wang, Ruobing Jiang, Zhongwen Guo, <b>Chao Liu*</b>. Afitness: Fitness Monitoring on Smart Devices via Acoustic Motion Images. <span class="text-tech-accent font-bold">ACM Transactions on Sensor Networks 2023</span>. (SCI, CCF B)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300 text-sm sm:text-base">Hui Xia, Ning Huang, Xuecai Feng, Rui Zhang, <b>Chao Liu*</b>. Starlet: Network Defense Resource Allocation with Multi-Armed Bandits for Cloud-edge Crowd Sensing in IoT. <span class="text-tech-accent font-bold">Digital Communications and Networks 2023</span>. (SCI)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300 text-sm sm:text-base">Shuai Guo, Meng Sun, Huanqun Xue, Xiaodong Mao, Shuang Wang, <b>Chao Liu*</b>. M-STCP: An online ship trajectory cleaning and prediction algorithm using matrix neural networks. <span class="text-tech-accent font-bold">Frontiers in Marine Science 2023</span>. (SCI)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300 text-sm sm:text-base">Xiaoxuan Cao, <b>Chao Liu*</b>. UltraMOSAS: Monitor Obstructive Sleep Apnea Syndrome using ultrasound. <span class="text-tech-accent font-bold">ACM TURC 2023</span>. (EI)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                            <p class="text-slate-300 text-sm sm:text-base">Jiaming Pei, Wenxuan Liu, Lukun Wang, <b>Chao Liu</b>, Ali Kashif Bashir, Yue Wang. Fed-IoUT: Opportunities and Challenges of Federated Learning in the Internet of Underwater Things. <span class="text-tech-accent font-bold">IEEE Internet of Things Magazine 2023</span>. (SCI)</p>
+                        </div>
+                    </div>
+                </div>
 
-<!--==========================================
-                   Publications
-===========================================-->
-<div class="row container" id="publications"><a name="Publications"></a><div class="row">
-<div class="title">Recent Publications (Full list:<a href="https://www.researchgate.net/profile/Chao-Liu-80/publications">ResearchGate</a>, <a href="https://scholar.google.com.hk/citations?user=m5TcEMQAAAAJ&hl=zh-CN">Google Scholar</a>)</div><hr>
-<!--<b>---Preprint---</b><br>
-<b>---2025---</b><br>
-   ● Hao Chen, Penghao Wang, Jingyang Hu, Feng Li, Hongbo Jiang, Minglu Li, <b>Chao Liu*</b>. Wi-GR: Wi-Fi-based Gait Recognition Using Multi-part Velocity Profile. <b>IEEE Transactions on Mobile Computing</b> 2025. (CCF A)
-   <br>
+                <!-- 2022 -->
+                <div class="relative pt-8">
+                    <span class="absolute -left-10 sm:-left-12 top-8 bg-tech-bg border border-slate-700 text-slate-400 px-2 py-1 rounded text-xs font-mono font-bold">2022</span>
+                    <div class="space-y-4">
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                             <p class="text-slate-300 text-sm sm:text-base">Penghao Wang, Ruobing Jiang, and <b>Chao Liu*</b>. Amaging: Acoustic Hand Imaging for Self-adaptive Gesture Recognition. <span class="text-tech-accent font-bold">INFOCOM 2022</span>. (CCF A)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                             <p class="text-slate-300 text-sm sm:text-base"><b>Chao Liu</b>, Linlin Gao, Ruobing Jiang*, and Zhongwen Guo. Acoustic-based 2-D Target Tracking with Constrained Intelligent Edge Device. <span class="text-tech-accent font-bold">Journal of Systems Architecture 2022</span>. (SCI, CCF B)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                             <p class="text-slate-300 text-sm sm:text-base"><b>Chao Liu</b>, Linlin Gao, and Ruobing Jiang*. NearTracker: Acoustic 2-D Target Tracking with Nearby Reflector in SISO System. <span class="text-tech-accent font-bold">ICASSP 2022</span>. (CCF B)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                             <p class="text-slate-300 text-sm sm:text-base">Ruobing Jiang, and <b>Chao Liu*</b>. Enhancing Marine Data Transmission with Socially-Aware Resilient Vessel Networks. <span class="text-tech-accent font-bold">IEEE Wireless Communications 2022</span>. (SCI)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                             <p class="text-slate-300 text-sm sm:text-base">Xiaowen Hou, and <b>Chao Liu*</b>. Rope Jumping Strength Monitoring on Smart Devices via Passive Acoustic Sensing. <span class="text-tech-accent font-bold">Sensors 2022</span>. (SCI)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                             <p class="text-slate-300 text-sm sm:text-base">Rui Zhang, Hui Xia*, Chunqiang Hu*, Cheng Zhang, <b>Chao Liu</b> and Fu Xiao. Generating Adversarial Examples with Shadow Model. <span class="text-tech-accent font-bold">IEEE Transactions on Industrial Informatics 2022</span>. (SCI)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                             <p class="text-slate-300 text-sm sm:text-base">Xiaohui Wang, Ruobing Jiang*, He Zhang, <b>Chao Liu</b> and Feng Hong. A Simulator Driven by Trajectory Big Data for Network Feature Extraction and Data Transmission. <span class="text-tech-accent font-bold">MASS 2022</span>. (CCF C)</p>
+                        </div>
+                    </div>
+                </div>
 
-	<br>-->
-<b>---2025---</b><br>
-  ● Xue Gong, Kaiwen Guo, Hao Chen, Feng Li, <b>Chao Liu*</b>. Stick, Swipe, Secure: Acoustic Cross-Device User Authentication via a Low-Cost Passive Fingerprint Sticker. <b>IMWUT/UbiComp</b> 2025. (CCF A)
-  <br>
-  ● Hao Chen, Penghao Wang, Jingyang Hu, Feng Li, Hongbo Jiang, Minglu Li, <b>Chao Liu*</b>. Wi-GR: Wi-Fi-based Gait Recognition Using Multi-part Velocity Profile. <b>IEEE Transactions on Mobile Computing</b> 2025. (CCF A)
-  <br>
-  ● Penghao Wang, Shuo Huai, Yetong Cao, <b>Chao Liu*</b>, Jun Luo. Threat from Windshield: Vehicle Windows as Involuntary Attack Sources on Automotive Voice Assistants. <b>CCS</b> 2025. (CCF A, Big 4)
-  <br>
-  ● Chongxuan Ma, Zheng Xie, Kaiwen Guo, <b>Chao Liu*</b>. NFINGER: Personalized Backside Gesture Recognition on Smartphones Using Back-mounted NFC Tag Array. <b>IMWUT/UbiComp</b> 2025. (CCF A)
-  <br>
-  ● Penghao Wang, Shujie Zhang, Chao Cai, <b>Chao Liu*</b>, Jun Luo. Sonic-Fi: Practical Vital Signs Distillation Leveraging Fine-grained Physical Resolution. <b>IMWUT/UbiComp</b> 2025. (CCF A)
-  <br>
-  ● <b>Chao Liu</b>, Hao Chen, Jingyang Hu, Qibo Zhang, Siyu Chen, Hongbo Jiang, Penghao Wang. EchoHealth: Non-contact Rehabilitation Exercises via Active Acoustic Sensing. <b>INFOCOM</b> 2025. (CCF A)
-  <br>
-  ● Hao Chen, Penghao Wang, Feng Hong, Zhongwen Guo, <b>Chao Liu*</b>. BEyes: Unseen Eyes Snooping Pattern Lock via BFI. <b>ICDCS</b> 2025. (CCF B)
-   <br>
-  ● <b>Chao Liu</b>, Yipeng Liu, Feng Hong, Zhongwen Guo, Jiguo Yu, Feng Li*. Mring: Contactless MR/AR Extended Input Method based on Magnetic Signal. <b>ACM Transactions on Sensor Networks</b> 2025. (SCI, CCF B)
-  <br>
-  ● Hui Liu, Penghao Wang, Pengyu Wang, Jingyang Hu, Hongbo Jiang, <b>Chao Liu*</b>. From Fragmentation to Correlation: Reliable LoRa Reception over Weak Marine Links. <b>ACM Transactions on Sensor Networks</b> 2025. (SCI, CCF B)
-   <br>
-  ● Shuai Guo, Menglei Xia, Huanqun Xue, Yutong Song, Zhitian Zhang, <b>Chao Liu*</b>. MATM-SN: A Deep Reinforcement Learning Model for Ocean Sensing Task Allocation based on Generative Social Network. <b>IEEE Internet of Things Journal</b> 2025. (SCI)
-  <br>
-<b>---2024---</b><br>
-   ● Penghao Wang, Ruobing Jiang, Jingyang Hu, Yanmin Zhu, Hongbo Jiang, Minglu Li, <b>Chao Liu*</b>. AMT<sup>+</sup>: Acoustic Multi-target Tracking with Smartphone MIMO System. <b>IEEE Transactions on Mobile Computing</b> 2024. (SCI, CCF A)
-   <br>   
-   ● Penghao Wang, Jingzhi Hu, <b>Chao Liu*</b>, Jun Luo. RefleXnoop: Passwords Snooping on NLoS Laptops Leveraging Screen-Induced Sound Reflection. <b>CCS</b> 2024. (CCF A, Big 4, <strong style="color: red;"><b>Distinguished Paper Award</b></strong>)
-   <br>  
-   ● Zhaopeng Xu, Tong Liu, Ruobing Jiang, Pengfei Hu, Zhongwen Guo, <b>Chao Liu*</b>. AFace: Range-flexible Anti-spoofing Face Authentication via Smartphone Acoustic Sensing. <b>IMWUT/UbiComp</b> 2024. (CCF A)
-   <br>  
-   ● Penghao Wang, Ruobing Jiang, <b>Chao Liu*</b>, Jun Luo. AGR: Acoustic Gait Recognition Using Interpretable Micro-Range Profile. <b>INFOCOM</b> 2024. (CCF A)
-   <br>
-   ● Shuai Guo, Meilei Xia, Huanqun Xue, Shuang Wang, <b>Chao Liu*</b>. OceanCrowd: Vessel Trajectory Data-based Participant Selection for Mobile Crowd Sensing in Ocean Observation. <b>IEEE Transactions on Sustainable Computing</b> 2024. (SCI)
-   <br>
-   ● Haotian Zhang, Lukun Wang, Jiaming Pei, Feng Lyu, Minglu Li, <b>Chao Liu*</b>. RF-Sign: Position-Independent Sign Language Recognition Using Passive RFID Tags. <b>IEEE Internet of Things Journal</b> 2024. (SCI)
-   <br>
-   ● Yang Wang, Feng Hong, Yufei Jiang, Chenyu Bao, <b>Chao Liu</b>, Zhongwen Guo. ToothFairy: Real-time Tooth-by-tooth Brushing Monitor using Earphone Reversed Signals. <b>IMWUT/UbiComp</b> 2024. (CCF A)
-   <br>
-   ● Lina Wang, Huan Yang, Yiran Shen, <b>Chao Liu</b>, Lianyong Qi, Xiuzhen Cheng, Feng Li. PDSR: A Privacy-Preserving Diversified ServiceRecommendation Method on Distributed Data. <b>IEEE Transactions on Services Computing</b> 2024. (SCI, CCF A)
-   <br>	
-   ● Chengwu Liao, Chao Chen, Wanyi Zhang, Suiming Guo, <b>Chao Liu</b>. AGENDA: Predicting Trip Purposes with A New Graph Embedding Network and Active Domain Adaptation. <b>ACM Transactions on Knowledge Discovery from Data</b> 2024. (SCI, CCF B)
-   <br>
-   ● Siyu Chen, Hongbo Jiang, Jie Xiong, Jingyang Hu, Penghao Wang, <b>Chao Liu</b>, Zhu Xiao, Bo Li. BeamCount: Indoor Crowd Counting Using Wi-Fi Beamforming Feedback Information. <b>MobiHoc</b> 2024. (CCF B)
-   <br>
-<b>---2023---</b><br>
-   ● Hui Xia, Shuo Xu, Jiaming Pei, Rui Zhang, Zhi Yu, Weitao Zou, Lukun Wang, <b>Chao Liu*</b>. FedME<sup>2</sup>: Memory Evaluation & Erase Promoting Federated Unlearning in DTMN. <b>IEEE Journal on Selected Areas in Communications(JSAC)</b> 2023. (SCI, CCF A)
-   <br>
-   ● Penghao Wang, Ruobing Jiang, Zhongwen Guo, <b>Chao Liu*</b>. Afitness: Fitness Monitoring on Smart Devices via Acoustic Motion Images. <b>ACM Transactions on Sensor Networks</b> 2023. (SCI, CCF B)
-   <br>
-   ● Hui Xia, Ning Huang, Xuecai Feng, Rui Zhang, <b>Chao Liu*</b>. Starlet: Network Defense Resource Allocation with Multi-Armed Bandits for Cloud-edge Crowd Sensing in IoT. <b>Digital Communications and Networks</b> 2023. (SCI)
-   <br>
-   ● Shuai Guo, Meng Sun, Huanqun Xue, Xiaodong Mao, Shuang Wang, <b>Chao Liu*</b>. M-STCP: An online ship trajectory cleaning and prediction algorithm using matrix neural networks. <b>Frontiers in Marine Science</b> 2023. (SCI)
-   <br>
-   ● Xiaoxuan Cao, <b>Chao Liu*</b>. UltraMOSAS: Monitor Obstructive Sleep Apnea Syndrome using ultrasound. <b>ACM TURC</b> 2023. (EI)
-   <br>
-   ● Jiaming Pei, Wenxuan Liu, Lukun Wang, <b>Chao Liu</b>, Ali Kashif Bashir, Yue Wang. Fed-IoUT: Opportunities and Challenges of Federated Learning in the Internet of Underwater Things. <b>IEEE Internet of Things Magazine</b> 2023. (SCI)
-   <br>
-<b>---2022---</b><br>
-      ● Penghao Wang, Ruobing Jiang, and <b>Chao Liu*</b>. Amaging: Acoustic Hand Imaging for Self-adaptive Gesture Recognition. <b>INFOCOM 2022</b>. (CCF A)
-   <br>
-      ● <b>Chao Liu</b>, Linlin Gao, Ruobing Jiang*, and Zhongwen Guo. Acoustic-based 2-D Target Tracking with Constrained Intelligent Edge Device. <b>Journal of Systems Architecture</b> 2022. (SCI, CCF B)
-   <br>
-      ● <b>Chao Liu</b>, Linlin Gao, and Ruobing Jiang*. NearTracker: Acoustic 2-D Target Tracking with Nearby Reflector in SISO System. <b>ICASSP 2022</b>. (CCF B)
-   <br>
-      ● Ruobing Jiang, and <b>Chao Liu*</b>. Enhancing Marine Data Transmission with Socially-Aware Resilient Vessel Networks. <b>IEEE Wireless Communications</b> 2022. (SCI)
-   <br>
-      ● Xiaowen Hou, and <b>Chao Liu*</b>. Rope Jumping Strength Monitoring on Smart Devices via Passive Acoustic Sensing. <b>Sensors</b> 2022. (SCI)
-   <br>
-      ● Rui Zhang, Hui Xia*, Chunqiang Hu*, Cheng Zhang, <b>Chao Liu</b> and Fu Xiao. Generating Adversarial Examples with Shadow Model. <b>IEEE Transactions on Industrial Informatics</b> 2022. (SCI)
-   <br> 
-      ● Xiaohui Wang, Ruobing Jiang*, He Zhang, <b>Chao Liu</b> and Feng Hong. A Simulator Driven by Trajectory Big Data for Network Feature Extraction and Data Transmission. <b>MASS 2022</b>. (CCF C)
-   <br>
-<b>---2021---</b><br>
-       ● <b>Chao Liu</b>, Penghao Wang, Ruobing Jiang*, and Yanmin Zhu. AMT: Acoustic Multi-target Tracking with Smartphone MIMO System. <b>INFOCOM 2021</b>. (CCF A)
-   <br>
-      ●  <b>Chao Liu</b>, Yingbin Li, Ruobing Jiang*, Yong Du*, Qian Lu, and Zhongwen Guo. TPR-DTVN: A Routing Algorithm in Delay Tolerant Vessel Network based on Long-term Trajectory Prediction. <b>Wireless Communications and Mobile Computing</b> 2021. (SCI, CCF C)
-   <br>
-      ●  Jie Gui, Yuan Cao, Heng Qi, Keqiu Li, Jieping Ye, <b>Chao Liu</b>, Xiaowei Xu. Fast kNN Search in Weighted Hamming Space with Multiple Tables. <b>IEEE Transactions on Image Processing</b> 2021. (SCI, CCF A)
-   <br>
-      ●  Yuan Cao, Junwei Liu, Heng Qi, Jie Gui, Keqiu Li, Jieping Ye, <b>Chao Liu</b>. Scalable Distributed Hashing for ApproximateNearest Neighbor Search. <b>IEEE Transactions on Image Processing</b> 2021. (SCI, CCF A)
-   <br>
-      ●  Yuan Cao, Sheng Chen, Jie Gui, Heng Qi, Zhiyang Li, and <b>Chao Liu</b>. Hash Learning with Variable Quantization for Large-scale Retrieval. <b>IEEE Transactions on Circuits and Systems for Video Technology</b> 2021. (SCI, CCF B) 
-   <br>
-      ●  Rui Zhang, Hui Xia*, <b>Chao Liu</b>, et. al. Anti-Attack Scheme for Edge Devices Based on Deep Reinforcement Learning. <b>Wireless Communications and Mobile Computing</b> 2021. (SCI, CCF C)
- <br>
-      ● Zhongning Zhao, Feng Hong*, Haiguang Huang, <b>Chao Liu</b>, Yuan Feng, Zhongwen Guo. Short-term prediction of fishing effort distributions by discovering fishing chronology among trawlers based on VMS dataset. <b>Expert Systems With Applications</b> 2021. (SCI, CCF C)
- <br>
-      ● Guanlong Teng, Yue Xu, Feng Hong*, Jianbo Qi, Ruobing Jiang, <b>Chao Liu</b>, Zhongwen Guo. Recognizing and Counting Freehand Exercises using Ubiquitous Cellular Signals. <b>Sensors</b> 2021. (SCI)
-  <br>
-<!--<b>---2020---</b><br>
-      ● Guanlong Teng, Feng Hong, Yue Xu, Jianbo Qi, Ruobing Jiang, <b>Chao Liu</b> and Zhongwen Guo. MobiFit: Contactless Fitness Assistant for Freehand Exercises Using Just One Cellular Signal Receiver. <b>MSN 2020</b>. (CCF C)
-    <br>
-      ● <b>Chao Liu</b>, Yingbin Li, Ruobing Jiang*, et. al. Trajectory-based Data Delivery Algorithm in Maritime Vessel Networks based on Bi-LSTM. <b>WASA 2020</b>. (CCF C)
-   <br>
-      ● Wei Jing,  <b>Chao Liu*</b>, Ting Li, et. al. Path Planning and Navigation of Oceanic Autonomous Sailboats and Vessels: A Survey. <b>Journal of Ocean University of China</b> 2020. (SCI)    
-     <br>
-      ● Hui Xia, Li Li, Xiangguo Cheng,  <b>Chao Liu</b> and Tie Qiu. A dynamic virus propagation model based on social attributes in city IoTs. <b>IEEE Internet of Things Journal</b> 2020. (SCI)    
-    <br>
-<b>---2019---</b><br>
-      ●  <b>Chao Liu</b>, Shuai Guo, Yuan Feng, Feng Hong ,Haiguang Huang and Zhongwen Guo. L-VTP: Long-term vessel trajectory prediction based on multi-source data analysis. <b>Sensors</b> 2019. (SCI)
- <br>
-      ● <b>Chao Liu*</b>, Sining Jiang, Shuo Zhao and Zhongwen Guo. Infrastructure-free Indoor Pedestrian Tracking with Smartphone Acoustic-based Enhancement. <b>Sensors</b> 2019. (SCI)
-	 <br>
-    ●  <b>Chao Liu</b>, Xi Wang*, Hanjiang Luo*, Yuan Liu, and Zhongwen Guo. VA: Virtual Node Assisted Localization Algorithm for Underwater Acoustic Sensor Networks. IEEE Access 2019. (SCI) 
-	 <br> 
-      ● <b>Chao Liu</b>, Yingbin Li, Ruobing Jiang*, Feng Hong, and Zhongwen Guo. OceanNet: A Low- cost large-scale maritime communication architecture based on D2D communication technology. <b>TURC 2019</b>. (EI)
-	 <br>
-      ● Hanjiang Luo#,  <b>Chao Liu#</b>, Yongquan Liang. A SDN-based Testbed for Underwater Sensor Networks. TURC 2019. (EI)
- <br><b>---2018---</b><br>
-● Shuai Guo, <b>Chao Liu*</b>, Zhongwen Guo, Yuan Feng, Feng Hong and Haiguang Huang, Trajectory Prediction for Ocean Vessels Based on K-order Multivariate Markov Chain. <b>WASA 2018</b>.(CCF C)
-<br>
-● <b>Chao Liu</b>, Yingjian Liu*, Zhongwen Guo and Wei Jing. OceanRoute: Vessel Mobility Data Processing and Analyzing Model Based on MapReduce. <b>J. Ocean Univ. China</b> 2018.(SCI)
-<br>
-● Zhongwei Sun, Zhongwen Guo, <b>Chao Liu*</b>, Mingxing Jiang and Xi Wang. Fast Multi-label SVM Training Based on Approximate Extreme Points. <b>Intelligent Data Analysis</b> 2018.(SCI)
-<br> -->
-<br>
-<b>---Before 2021---</b><br>
-See Full List: <a href="https://www.researchgate.net/profile/Chao-Liu-80/publications">ResearchGate</a>, <a href="https://scholar.google.com.hk/citations?user=m5TcEMQAAAAJ&hl=zh-CN">Google Scholar</a>
-</div></div>
+                <!-- 2021 -->
+                <div class="relative pt-8">
+                    <span class="absolute -left-10 sm:-left-12 top-8 bg-tech-bg border border-slate-700 text-slate-400 px-2 py-1 rounded text-xs font-mono font-bold">2021</span>
+                    <div class="space-y-4">
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                             <p class="text-slate-300 text-sm sm:text-base"><b>Chao Liu</b>, Penghao Wang, Ruobing Jiang*, and Yanmin Zhu. AMT: Acoustic Multi-target Tracking with Smartphone MIMO System. <span class="text-tech-accent font-bold">INFOCOM 2021</span>. (CCF A)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                             <p class="text-slate-300 text-sm sm:text-base"><b>Chao Liu</b>, Yingbin Li, Ruobing Jiang*, Yong Du*, Qian Lu, and Zhongwen Guo. TPR-DTVN: A Routing Algorithm in Delay Tolerant Vessel Network based on Long-term Trajectory Prediction. <span class="text-tech-accent font-bold">Wireless Communications and Mobile Computing 2021</span>. (SCI, CCF C)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                             <p class="text-slate-300 text-sm sm:text-base">Jie Gui, Yuan Cao, Heng Qi, Keqiu Li, Jieping Ye, <b>Chao Liu</b>, Xiaowei Xu. Fast kNN Search in Weighted Hamming Space with Multiple Tables. <span class="text-tech-accent font-bold">IEEE Transactions on Image Processing 2021</span>. (SCI, CCF A)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                             <p class="text-slate-300 text-sm sm:text-base">Yuan Cao, Junwei Liu, Heng Qi, Jie Gui, Keqiu Li, Jieping Ye, <b>Chao Liu</b>. Scalable Distributed Hashing for ApproximateNearest Neighbor Search. <span class="text-tech-accent font-bold">IEEE Transactions on Image Processing 2021</span>. (SCI, CCF A)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                             <p class="text-slate-300 text-sm sm:text-base">Yuan Cao, Sheng Chen, Jie Gui, Heng Qi, Zhiyang Li, and <b>Chao Liu</b>. Hash Learning with Variable Quantization for Large-scale Retrieval. <span class="text-tech-accent font-bold">IEEE Transactions on Circuits and Systems for Video Technology 2021</span>. (SCI, CCF B)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                             <p class="text-slate-300 text-sm sm:text-base">Rui Zhang, Hui Xia*, <b>Chao Liu</b>, et. al. Anti-Attack Scheme for Edge Devices Based on Deep Reinforcement Learning. <span class="text-tech-accent font-bold">Wireless Communications and Mobile Computing 2021</span>. (SCI, CCF C)</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                             <p class="text-slate-300 text-sm sm:text-base">Zhongning Zhao, Feng Hong*, Haiguang Huang, <b>Chao Liu</b>, Yuan Feng, Zhongwen Guo. Short-term prediction of fishing effort distributions by discovering fishing chronology among trawlers based on VMS dataset. <span class="text-tech-accent font-bold">Expert Systems With Applications 2021</span>. (SCI, CCF C)</p>
+                        </div>
+                         <div class="bg-slate-800/50 p-3 sm:p-4 rounded hover:bg-slate-800 transition border-l-4 border-transparent hover:border-tech-accent">
+                             <p class="text-slate-300 text-sm sm:text-base">Guanlong Teng, Yue Xu, Feng Hong*, Jianbo Qi, Ruobing Jiang, <b>Chao Liu</b>, Zhongwen Guo. Recognizing and Counting Freehand Exercises using Ubiquitous Cellular Signals. <span class="text-tech-accent font-bold">Sensors 2021</span>. (SCI)</p>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="pt-6">
+                    <a href="https://www.researchgate.net/profile/Chao-Liu-80/publications" class="text-sm text-slate-500 hover:text-white border-b border-dashed border-slate-500">View Full List in ResearchGate (Before 2021)...</a>
+                </div>
 
-<!--==========================================
-                   专利和奖励
-===========================================-->
-<div class="row container"><a name="Patents"></a><div class="row"><br>
-<div class="title">专利和奖励</div><hr>
+            </div>
+        </div>
+    </section>
 
-<p>
-<b>专利：</b><br>
-● 刘超，赵硕，一种基于超声波的签到系统设计. 发明专利。申请号：CN202010052602.7 <br>
-● 刘超，李英斌，蒋若冰，一种基于预测轨迹的海洋船舶无线网络路由方法. 发明专利。申请号：CN202010281770.3<br>      <!--= 2022授权  =-->
-● 刘超，王鹏皓，蒋若冰，一种基于多扬声器和多麦克风声波多目标追踪方法. 发明专利。申请号：CN202011085184.8<br>    <!--= 2022授权  =-->
-● 王鹏皓，刘超，蒋若冰，基于声波成像的手势识别方法. 发明专利。申请号：CN202111285099.0<br>
-● 刘超，高林林，蒋若冰，一种利用环境反射的声波目标追踪方法. 发明专利。申请号：CN202111604330.8<br>
-● 杨飏(本科生)，刘超，行为识别方法、远程控制方法、装置、系统、设备及介质. 发明专利。申请号：CN202211238946.2<br> <!--= 2023授权  =-->
-	<br>
-<b>奖励：</b><br>
-● 2025 山东省优秀青年基金获得者<br>
-● 2024 ACM CCS Distinguished Paper Award（with Penghao Wang, Jingzhi Hu, Jun Luo）<br>
-● 2025 青岛市产业领军人才<br>
-● 2025 中国海洋大学研究生优秀成果一等奖（指导教师 with 郭忠文）<br>	
-● 2025 华为杯研究生人工智能创新大赛全国二等奖（指导教师）<br>	
-● 2022 山东省高等学校青年创新团队“智能物联网创新团队”（with 王志刚、张昊、刘玉涛、蒋若冰、都勇、王斌）<br>	
-● 2020 ACM China SIGAPP 新星奖<br>	
-● 2024 人社部国家优质公需课《面向泛在场景的物联网感知技术》<br>
-● 2022 第九届山东省教学成果奖（高等教育类）一等奖（with 郭忠文，洪锋，蒋永国，姜明星，王玺）<br>
-● 2021 国家级一流课程《物联网系统设计与开发》（with 郭忠文，蒋永国，蒋若冰，王宁）<br>
-● 2022 海南省精品课《物联网技术》（with 郭忠文，洪锋，冯源，王玺）<br>
-● 2022 山东省首届专业技术人员继续教育优质在线公需课《面向泛在场景的物联网感知技术》<br>
-● 2021 “正大杯”大学生创新创业实战营销大赛国家一等奖（指导教师）<br>
-● 2021 挑战杯山东省一等奖 （指导教师 with 蒋若冰、赵凤娇）<br>
-● 2020 58 AI大赛冠军（指导教师with 郭忠文、蒋若冰）<br>
-● 2020 iCAN国际创新创业大赛全国一等奖（10强，指导教师 with 蒋若冰）<br>
-● 2020 iCAN国际创新创业大赛山东赛区一等奖（指导教师 with 蒋若冰）<br>
-● 2020 山东省物联网创造力大赛一等奖（指导教师 with 蒋若冰）<br>
-● 2020 Kaggle数据挖掘大赛金牌（指导教师）<br>
-● 2021 “市长杯”创客城市合伙人创客邀请赛优胜奖（指导教师）<br>
-● 2020 智慧树“双一流高校专业课程TOP100”-数据结构（with 魏振钢、高云、林喜军）<br>
-● Bigcom 2016 Best Paper Candidate Award<br>
-● 2013 山东省研究生优秀科技创新成果一等奖<br>
-● IEEE 1851 杰出贡献奖励<br>
-● 2019 中国海洋大学研究生教育成果一等奖 （with 郭忠文、洪锋）<br>
+    <!-- ==========================================
+         PROJECTS / FUNDING (COMPLETE)
+         ========================================== -->
+    <section id="projects" class="py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-8 flex items-center text-white">
+                <span class="text-tech-accent mr-2">/</span> 研究项目
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 1 -->
+                <div class="tech-card p-5 rounded-lg">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-mono text-tech-purple bg-tech-purple/10 px-2 py-1 rounded">2023/01-2026/12</span>
+                        <span class="text-xs font-bold text-slate-400">¥700,000</span>
+                    </div>
+                    <h3 class="font-bold text-white mb-1 text-sm">国家自然科学基金面上项目</h3>
+                    <p class="text-xs text-slate-400">面向泛在场景的非接触式声波感知关键技术研究 (#62272427) (位次1)</p>
+                </div>
+                <!-- 2 -->
+                 <div class="tech-card p-5 rounded-lg">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-mono text-tech-purple bg-tech-purple/10 px-2 py-1 rounded">2025/10-2028/09</span>
+                        <span class="text-xs font-bold text-slate-400">¥500,000</span>
+                    </div>
+                    <h3 class="font-bold text-white mb-1 text-sm">山东省优秀青年基金</h3>
+                    <p class="text-xs text-slate-400">泛在无线智能感知 (#ZR2025QB43) (位次1)</p>
+                </div>
+                <!-- 3 -->
+                 <div class="tech-card p-5 rounded-lg">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-mono text-tech-purple bg-tech-purple/10 px-2 py-1 rounded">2025/08-2025/10</span>
+                        <span class="text-xs font-bold text-slate-400">¥473,300</span>
+                    </div>
+                    <h3 class="font-bold text-white mb-1 text-sm">高校外协横向课题</h3>
+                    <p class="text-xs text-slate-400">(位次1)</p>
+                </div>
+                <!-- 4 -->
+                 <div class="tech-card p-5 rounded-lg">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-mono text-tech-purple bg-tech-purple/10 px-2 py-1 rounded">2025/07-2026/07</span>
+                        <span class="text-xs font-bold text-slate-400">¥300,000</span>
+                    </div>
+                    <h3 class="font-bold text-white mb-1 text-sm">应急管理部重点实验室开放课题</h3>
+                    <p class="text-xs text-slate-400">基于深度学习的电芯故障识别和热失控预测技术 (#EES2025KF22) (位次1)</p>
+                </div>
+                <!-- 5 -->
+                 <div class="tech-card p-5 rounded-lg">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-mono text-tech-purple bg-tech-purple/10 px-2 py-1 rounded">2025/01-2027/12</span>
+                        <span class="text-xs font-bold text-slate-400">¥100,000</span>
+                    </div>
+                    <h3 class="font-bold text-white mb-1 text-sm">教育部重点实验室重点课题</h3>
+                    <p class="text-xs text-slate-400">基于边缘算力网的大规模视频分析系统资源调度机制研究 (#2024ZD003) (位次1)</p>
+                </div>
+                <!-- 6 -->
+                 <div class="tech-card p-5 rounded-lg">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-mono text-tech-purple bg-tech-purple/10 px-2 py-1 rounded">2023/11-2023/12</span>
+                        <span class="text-xs font-bold text-slate-400">¥180,000</span>
+                    </div>
+                    <h3 class="font-bold text-white mb-1 text-sm">企业横向委托项目</h3>
+                    <p class="text-xs text-slate-400">海上5G数据传输协议研发 (位次1)</p>
+                </div>
+                <!-- 7 -->
+                <div class="tech-card p-5 rounded-lg">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-mono text-tech-purple bg-tech-purple/10 px-2 py-1 rounded">2023/01-2025/12</span>
+                        <span class="text-xs font-bold text-slate-400">¥200,000</span>
+                    </div>
+                    <h3 class="font-bold text-white mb-1 text-sm">山东省高等学校青年创新团队</h3>
+                    <p class="text-xs text-slate-400">智能物联网创新团队 (#2022KJ043) (位次1)</p>
+                </div>
+                <!-- 8 -->
+                <div class="tech-card p-5 rounded-lg">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-mono text-tech-purple bg-tech-purple/10 px-2 py-1 rounded">2022/06-2025/06</span>
+                        <span class="text-xs font-bold text-slate-400">¥80,000</span>
+                    </div>
+                    <h3 class="font-bold text-white mb-1 text-sm">海南省自然科学基金联合项目</h3>
+                    <p class="text-xs text-slate-400">基于船联网的海洋移动群智感知关键技术研究 (#2021JJLH0060) (位次1)</p>
+                </div>
+                <!-- 9 -->
+                <div class="tech-card p-5 rounded-lg">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-mono text-tech-purple bg-tech-purple/10 px-2 py-1 rounded">2022/01-2024/12</span>
+                        <span class="text-xs font-bold text-slate-400">¥180,000</span>
+                    </div>
+                    <h3 class="font-bold text-white mb-1 text-sm">青岛市标准化奖励资助</h3>
+                    <p class="text-xs text-slate-400">ISO 21851国际标准 (#QDBZH) (位次1)</p>
+                </div>
+                <!-- 10 -->
+                <div class="tech-card p-5 rounded-lg">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-mono text-tech-purple bg-tech-purple/10 px-2 py-1 rounded">2020/01-2022/12</span>
+                        <span class="text-xs font-bold text-slate-400">¥270,000</span>
+                    </div>
+                    <h3 class="font-bold text-white mb-1 text-sm">国家自然科学基金青年基金</h3>
+                    <p class="text-xs text-slate-400">基于多源时空大数据驱动的广海域船联网数据传输算法研究 (#61902367) (位次1)</p>
+                </div>
+                <!-- 11 -->
+                <div class="tech-card p-5 rounded-lg">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-mono text-tech-purple bg-tech-purple/10 px-2 py-1 rounded">2021/05-2022/06</span>
+                        <span class="text-xs font-bold text-slate-400">¥150,000</span>
+                    </div>
+                    <h3 class="font-bold text-white mb-1 text-sm">中国海洋大学研究生教育改革项目</h3>
+                    <p class="text-xs text-slate-400">前沿需求导向的物联网高端人才培养模式研究 (#HDJG21007) (位次1)</p>
+                </div>
+                 <!-- 12 -->
+                 <div class="tech-card p-5 rounded-lg">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-mono text-tech-purple bg-tech-purple/10 px-2 py-1 rounded">2018/03-2020/12</span>
+                        <span class="text-xs font-bold text-slate-400">¥100,000</span>
+                    </div>
+                    <h3 class="font-bold text-white mb-1 text-sm">山东省自然科学基金博士基金</h3>
+                    <p class="text-xs text-slate-400">基于海量多维轨迹分析的船舶移动自组织网络路由算法研究 (#ZR2018BF006) (位次1)</p>
+                </div>
+                 <!-- 13 -->
+                 <div class="tech-card p-5 rounded-lg">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-mono text-tech-purple bg-tech-purple/10 px-2 py-1 rounded">2017/11-2018/11</span>
+                        <span class="text-xs font-bold text-slate-400">¥80,000</span>
+                    </div>
+                    <h3 class="font-bold text-white mb-1 text-sm">中国博士后基金面上项目</h3>
+                    <p class="text-xs text-slate-400">基于移动轨迹大数据的船舶移动时空动态研究 (一等资助, #2017M620293) (位次1)</p>
+                </div>
+                <!-- 14 -->
+                <div class="tech-card p-5 rounded-lg">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-mono text-tech-purple bg-tech-purple/10 px-2 py-1 rounded">2017/08-2018/08</span>
+                        <span class="text-xs font-bold text-slate-400">¥50,000</span>
+                    </div>
+                    <h3 class="font-bold text-white mb-1 text-sm">青岛市博士后应用研究计划</h3>
+                    <p class="text-xs text-slate-400">(位次1)</p>
+                </div>
+                <!-- 15 -->
+                <div class="tech-card p-5 rounded-lg">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-mono text-tech-purple bg-tech-purple/10 px-2 py-1 rounded">2016/10-2019/12</span>
+                        <span class="text-xs font-bold text-slate-400">¥350,000</span>
+                    </div>
+                    <h3 class="font-bold text-white mb-1 text-sm">国家重点研发计划</h3>
+                    <p class="text-xs text-slate-400">“海洋环境安全保障”专项子任务 (#2016YFC1401907) (位次1)</p>
+                </div>
+                <!-- 16 -->
+                <div class="tech-card p-5 rounded-lg">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-mono text-tech-purple bg-tech-purple/10 px-2 py-1 rounded">2016/10–2018/12</span>
+                        <span class="text-xs font-bold text-slate-400">¥100,000</span>
+                    </div>
+                    <h3 class="font-bold text-white mb-1 text-sm">中央高校科研基金</h3>
+                    <p class="text-xs text-slate-400">海洋船舶移动轨迹大数据分析与处理关键技术研究 (位次1)</p>
+                </div>
+                <!-- 17 -->
+                <div class="tech-card p-5 rounded-lg border-slate-700 bg-slate-800/30">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-mono text-slate-500 bg-slate-700/30 px-2 py-1 rounded">2014/01–2017/12</span>
+                        <span class="text-xs font-bold text-slate-500">¥760,000</span>
+                    </div>
+                    <h3 class="font-bold text-slate-400 mb-1 text-sm">国家自然科学基金面上项目</h3>
+                    <p class="text-xs text-slate-500">传感器网络大数据处理模型关键技术研究 (#61379127) (参与)</p>
+                </div>
+                <!-- 18 -->
+                <div class="tech-card p-5 rounded-lg border-slate-700 bg-slate-800/30">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-mono text-slate-500 bg-slate-700/30 px-2 py-1 rounded">2014/01–2017/12</span>
+                        <span class="text-xs font-bold text-slate-500">¥780,000</span>
+                    </div>
+                    <h3 class="font-bold text-slate-400 mb-1 text-sm">国家自然科学基金面上项目</h3>
+                    <p class="text-xs text-slate-500">基于移动建模的水下传感器网络时间同步理论与算法研究 (#61379128) (参与)</p>
+                </div>
+                 <!-- 19 -->
+                 <div class="tech-card p-5 rounded-lg border-slate-700 bg-slate-800/30">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-mono text-slate-500 bg-slate-700/30 px-2 py-1 rounded">2010/01–2013/12</span>
+                        <span class="text-xs font-bold text-slate-500">¥2,600,000</span>
+                    </div>
+                    <h3 class="font-bold text-slate-400 mb-1 text-sm">国家自然科学基金重点项目</h3>
+                    <p class="text-xs text-slate-500">移动容迟网络理论与关键技术研究 (#60933011) (参与)</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- ==========================================
+         STANDARDS, PATENTS & AWARDS (Grouped)
+         ========================================== -->
+    <section id="standards" class="py-12 bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                
+                <!-- Left Column: Standards & Patents -->
+                <div class="space-y-12">
+                    <!-- Standards -->
+                    <div>
+                        <h2 class="text-2xl font-bold mb-6 flex items-center text-white">
+                            <i class="fas fa-book mr-3 text-tech-accent"></i> 标准与著作
+                        </h2>
+                        <ul class="space-y-3 text-sm text-slate-300 list-icon-check">
+                            <li>IEEE 1851-2023: IEEE Standard for Design Criteria of Integrated Sensor-Based Test Applications for Household Appliances. (<b>Chair</b>)</li>
+                            <li>ISO 21851-2020: Marine technology — Ocean observation systems — Design criteria of ocean hydro-meteorological observation systems reuse and interaction. (<b>Vice Chair</b>)</li>
+                            <li>IEEE 2735-2022: Standard for Interoperability of Complex Virtual Instruments for Internet of Things</li>
+                            <li>IEEE 2735.1-2022: Standard Design Criteria of Complex Virtual Instruments for Household Appliance Test</li>
+                            <li>IEEE 2402-2017: IEEE Standard Design Criteria of Complex Virtual Instruments for Ocean Observation</li>
+                            <li>GB/T 33137-2016: 《基于传感器的产品监测软件集成接口规范》</li>
+                            <li>郭忠文，<b>刘超</b>，王玺 著，《物联网工程设计与开发》，科学出版社“十四五”普通高等教育本科规划教材.（ISBN：9787030723901）</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Patents -->
+                    <div>
+                        <h2 class="text-2xl font-bold mb-6 flex items-center text-white">
+                            <i class="fas fa-file-contract mr-3 text-tech-purple"></i> 发明专利
+                        </h2>
+                        <ul class="space-y-3 text-sm text-slate-300 list-icon-check">
+                            <li>刘超，赵硕，一种基于超声波的签到系统设计. CN202010052602.7</li>
+                            <li>刘超，李英斌，蒋若冰，一种基于预测轨迹的海洋船舶无线网络路由方法. CN202010281770.3</li>
+                            <li>刘超，王鹏皓，蒋若冰，一种基于多扬声器和多麦克风声波多目标追踪方法. CN202011085184.8</li>
+                            <li>王鹏皓，刘超，蒋若冰，基于声波成像的手势识别方法. CN202111285099.0</li>
+                            <li>刘超，高林林，蒋若冰，一种利用环境反射的声波目标追踪方法. CN202111604330.8</li>
+                            <li>杨飏(本科生)，刘超，行为识别方法、远程控制方法、装置、系统、设备及介质. CN202211238946.2</li>
+                        </ul>
+                    </div>
+                </div>
 
-</p>
-  
- 
-</div></div>
+                <!-- Right Column: Awards -->
+                <div>
+                     <h2 class="text-2xl font-bold mb-6 flex items-center text-white">
+                        <i class="fas fa-medal mr-3 text-yellow-500"></i> 荣誉与奖励
+                    </h2>
+                     <ul class="space-y-3 text-sm text-slate-300 h-[600px] overflow-y-auto pr-2 custom-scrollbar border border-slate-800 rounded-lg p-4 bg-slate-800/30">
+                        <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2 flex-shrink-0"></i> 2025 山东省优秀青年基金获得者</li>
+                        <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2 flex-shrink-0"></i> <span class="font-bold text-white">2024 ACM CCS Distinguished Paper Award</span> (with Penghao Wang, Jingzhi Hu, Jun Luo)</li>
+                        <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2 flex-shrink-0"></i> 2025 青岛市产业领军人才</li>
+                        <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2 flex-shrink-0"></i> 2025 中国海洋大学研究生优秀成果一等奖（指导教师 with 郭忠文）</li>
+                        <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2 flex-shrink-0"></i> 2025 华为杯研究生人工智能创新大赛全国二等奖（指导教师）</li>
+                        <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2 flex-shrink-0"></i> 2022 山东省高等学校青年创新团队“智能物联网创新团队”（with 王志刚、张昊、刘玉涛、蒋若冰、都勇、王斌）</li>
+                        <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2 flex-shrink-0"></i> 2020 ACM China SIGAPP 新星奖</li>
+                        <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2 flex-shrink-0"></i> 2024 人社部国家优质公需课《面向泛在场景的物联网感知技术》</li>
+                        <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2 flex-shrink-0"></i> 2022 第九届山东省教学成果奖（高等教育类）一等奖（with 郭忠文，洪锋，蒋永国，姜明星，王玺）</li>
+                        <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2 flex-shrink-0"></i> 2021 国家级一流课程《物联网系统设计与开发》（with 郭忠文，蒋永国，蒋若冰，王宁）</li>
+                        <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2 flex-shrink-0"></i> 2022 海南省精品课《物联网技术》（with 郭忠文，洪锋，冯源，王玺）</li>
+                        <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2 flex-shrink-0"></i> 2022 山东省首届专业技术人员继续教育优质在线公需课《面向泛在场景的物联网感知技术》</li>
+                        <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2 flex-shrink-0"></i> 2021 “正大杯”大学生创新创业实战营销大赛国家一等奖（指导教师）</li>
+                        <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2 flex-shrink-0"></i> 2021 挑战杯山东省一等奖 （指导教师 with 蒋若冰、赵凤娇）</li>
+                        <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2 flex-shrink-0"></i> 2020 58 AI大赛冠军（指导教师with 郭忠文、蒋若冰）</li>
+                        <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2 flex-shrink-0"></i> 2020 iCAN国际创新创业大赛全国一等奖（10强，指导教师 with 蒋若冰）</li>
+                        <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2 flex-shrink-0"></i> 2020 iCAN国际创新创业大赛山东赛区一等奖（指导教师 with 蒋若冰）</li>
+                        <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2 flex-shrink-0"></i> 2020 山东省物联网创造力大赛一等奖（指导教师 with 蒋若冰）</li>
+                        <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2 flex-shrink-0"></i> 2020 Kaggle数据挖掘大赛金牌（指导教师）</li>
+                        <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2 flex-shrink-0"></i> 2021 “市长杯”创客城市合伙人创客邀请赛优胜奖（指导教师）</li>
+                        <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2 flex-shrink-0"></i> 2020 智慧树“双一流高校专业课程TOP100”-数据结构（with 魏振钢、高云、林喜军）</li>
+                        <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2 flex-shrink-0"></i> Bigcom 2016 Best Paper Candidate Award</li>
+                        <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2 flex-shrink-0"></i> 2013 山东省研究生优秀科技创新成果一等奖</li>
+                        <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2 flex-shrink-0"></i> IEEE 1851 杰出贡献奖励</li>
+                        <li class="flex items-start"><i class="fas fa-star text-yellow-500 mt-1 mr-2 flex-shrink-0"></i> 2019 中国海洋大学研究生教育成果一等奖 （with 郭忠文、洪锋）</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!--==========================================
-                   招生要求
-===========================================-->
-<div class="row container"><a name="Requirements"></a><div class="row"><br>
-<div class="title">招生要求</div><hr>
+    <!-- ==========================================
+         EXPERIENCE
+         ========================================== -->
+    <section id="experience" class="py-12">
+        <div class="max-w-7xl mx-auto px-4">
+             <h2 class="text-2xl font-bold mb-8 flex items-center text-white">
+                <span class="text-tech-accent mr-2">/</span> 教育及工作经历
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Education -->
+                <div class="tech-card p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2"><i class="fas fa-graduation-cap mr-2"></i> 教育经历</h3>
+                    <ul class="space-y-4">
+                        <li class="relative pl-6 border-l border-slate-600">
+                            <div class="absolute -left-1.5 top-1.5 w-3 h-3 bg-tech-accent rounded-full"></div>
+                            <span class="text-xs text-tech-accent font-mono">2014/10－2015/10</span>
+                            <p class="font-bold text-white">伊利诺伊理工大学 (IIT)</p>
+                            <p class="text-sm text-slate-400">联合培养博士</p>
+                        </li>
+                        <li class="relative pl-6 border-l border-slate-600">
+                            <div class="absolute -left-1.5 top-1.5 w-3 h-3 bg-tech-accent rounded-full"></div>
+                            <span class="text-xs text-tech-accent font-mono">2011/09－2016/07</span>
+                            <p class="font-bold text-white">中国海洋大学</p>
+                            <p class="text-sm text-slate-400">计算机系统结构，博士</p>
+                        </li>
+                         <li class="relative pl-6 border-l border-slate-600">
+                            <div class="absolute -left-1.5 top-1.5 w-3 h-3 bg-tech-accent rounded-full"></div>
+                            <span class="text-xs text-tech-accent font-mono">2007/09－2011/07</span>
+                            <p class="font-bold text-white">中国海洋大学</p>
+                            <p class="text-sm text-slate-400">计算机科学与技术，学士</p>
+                        </li>
+                    </ul>
+                </div>
+                
+                 <!-- Work & Service -->
+                <div class="tech-card p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2"><i class="fas fa-briefcase mr-2"></i> 工作与兼职</h3>
+                     <ul class="space-y-4">
+                        <li class="relative pl-6 border-l border-slate-600">
+                            <div class="absolute -left-1.5 top-1.5 w-3 h-3 bg-tech-purple rounded-full"></div>
+                            <span class="text-xs text-tech-purple font-mono">2016/7－今</span>
+                            <p class="font-bold text-white">中国海洋大学</p>
+                            <p class="text-sm text-slate-400">讲师，副教授</p>
+                        </li>
+                        <li class="mt-4">
+                            <p class="font-bold text-white mb-2">学术兼职：</p>
+                            <p class="text-sm text-slate-400 leading-relaxed text-justify">
+                                IEEE 1851国际标准工作组主席、ISO 21851国际标准工作组副主席、IEEE INFOCOM Advisory TPC Member、CCF物联网专委会执行委员、CCF普适计算专委会执行委员、 ACM SIGAPP China 执行委员会委员、ACM SIGBED China青年委员、ACM China青岛分会执行委员会委员、
+                                IEEE 2402国际标准工作组成员、IEEE 2735国际标准工作组成员、IEEE 2735.1 国际标准工作组成员、GB/T33137-2016国家标准工作组成员。
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<p>我们的团队主要面向前沿移动计算、智能感知相关问题展开研究（可提前阅读论文：https://arxiv.org/pdf/1901.03450.pdf ）。主要成果目标为CCF A、B类顶尖会议、期刊。招生要求：<br>
-1、有良好的数学基础（高等数学、线性代数）和动手能力；<br>
-2、具备复变函数、信号分析相关的基本知识优先；<br>
-3、有ACM竞赛相关获奖经历优先；<br>
-4、如果你以上3条都不具备，但非常勤奋，做好了刻苦奋斗3年的准备，也可以联系我。<br>
-*同时欢迎未来想从事科研工作的本科生加入我们的团队。
-*请邮件联系我（liuchao at ouc dot edu dot cn），邮件通常会在24小时内回复。
-</p>
-  
- 
-</div></div>
+    <!-- ==========================================
+         JOIN US
+         ========================================== -->
+    <section id="joinus" class="py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-tech-bg via-tech-card to-slate-900 z-[-1]"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-6 text-white">加入我们</h2>
+            <div class="tech-card p-8 rounded-2xl text-left border-t-4 border-t-tech-accent shadow-2xl">
+                <p class="text-slate-300 mb-6">
+                    我们的团队主要面向前沿移动计算、智能感知相关问题展开研究。主要成果目标为CCF A、B类顶尖会议、期刊。<br>
+                    可提前阅读论文：<a href="https://arxiv.org/pdf/1901.03450.pdf" class="text-tech-accent underline">Intro Paper PDF</a>
+                </p>
+                <div class="space-y-2 mb-8">
+                    <h4 class="font-bold text-white">招生要求：</h4>
+                    <ol class="list-decimal list-inside text-slate-400 space-y-2">
+                        <li>有良好的数学基础（高等数学、线性代数）和动手能力；</li>
+                        <li>具备复变函数、信号分析相关的基本知识优先；</li>
+                        <li>有ACM竞赛相关获奖经历优先；</li>
+                        <li>如果你以上3条都不具备，但非常勤奋，做好了刻苦奋斗3年的准备，也可以联系我。</li>
+                    </ol>
+                    <p class="text-sm text-slate-500 mt-4">* 同时欢迎未来想从事科研工作的本科生加入我们的团队。</p>
+                </div>
+                <div class="text-center">
+                    <a href="mailto:liuchao@ouc.edu.cn" class="inline-block px-8 py-4 bg-tech-accent text-slate-900 font-bold rounded-full hover:bg-white hover:scale-105 transition shadow-lg shadow-tech-accent/25">
+                        <i class="fas fa-paper-plane mr-2"></i> 联系我: liuchao@ouc.edu.cn
+                    </a>
+                    <p class="mt-4 text-xs text-slate-500">邮件通常会在24小时内回复</p>
+                </div>
+            </div>
+            
+            <footer class="mt-16 text-slate-600 text-sm">
+                <p>&copy; 2025 Chao Liu. Ocean University of China.</p>
+                <p>Designed with <i class="fas fa-heart text-red-500"></i> & Code.</p>
+            </footer>
+        </div>
+    </section>
 
+    <!-- Canvas Animation Script -->
+    <script>
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
 
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
 
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
+            }
 
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
 
-</body></html>
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.fillStyle = 'rgba(56, 189, 248, 0.5)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            particles = [];
+            for (let i = 0; i < 50; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 150) {
+                        ctx.strokeStyle = `rgba(56, 189, 248, ${0.1 - distance/1500})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+        init();
+        animate();
+    </script>
+</body>
+</html>
